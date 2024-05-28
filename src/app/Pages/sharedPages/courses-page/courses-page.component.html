@@ -1,0 +1,320 @@
+
+<div *ngIf="!isLoading">
+
+<div><img src="../../../../assets/welcome.gif" alt=""  style="width: 100%; height: 200px;">
+</div>
+
+    <!-- ---------------------------------------------------------------------------------------------- -->
+    <div>
+        
+        <!-- Sidebar  -->
+
+        <nav id="sidebar" [class.active]="sidebarActive">
+            
+            <div id="dismiss" (click)="toggleSidebar()">
+                <i class="bi bi-x" style="font-size: 30px;"></i>
+
+            </div>
+
+            <div class="sidebar-header">
+                <h3>Filter</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <div class="card">
+                        <div class="card-header" (click)="toggleCollapse('collapseOne')">
+                            <h5 class="mb-0">
+                                <button class="accordion-button" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Rating
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                            <div class="card-body">
+                                <div style="display:flex ; justify-content:space-between; margin-top: 10px;">
+                                    <a  class="link1" (click)="rating(1)">
+                                        <div style="width: 100%; display: flex; justify-content: space-between;">
+
+                                            <button class="ratingbutton">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <div style="margin-left: 25px;margin-top: 3px;"><label
+                                                    style="INLINE-SIZE: max-content;MARGIN: 5PX;">or high</label></div>
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                                <div style="display:flex ; justify-content:space-between; margin-top: 10px;">
+                                    <a  class="link1" (click)="rating(2)">
+
+
+                                        <div style="width: 100%; display: flex; justify-content: space-between;">
+
+                                            <button class="ratingbutton">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <div style="margin-left: 25px;margin-top: 3px;"><label
+                                                    style="INLINE-SIZE: max-content;MARGIN: 5PX;">or high</label></div>
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                                <div style="display:flex ; justify-content:space-between; margin-top: 10px;">
+                                    <a class="link1"  (click)="rating(3)">
+
+
+                                        <div style="width: 100%; display: flex; justify-content: space-between;">
+
+                                            <button class="ratingbutton">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <div style="margin-left: 25px;margin-top: 3px;"><label
+                                                    style="INLINE-SIZE: max-content;MARGIN: 5PX;">or high</label></div>
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                                <div style="display:flex ; justify-content:space-between; margin-top: 10px;">
+                                    <a  class="link1" (click)="rating(4)">
+
+
+                                        <div style="width: 100%; display: flex; justify-content: space-between;">
+
+                                            <button class="ratingbutton" >
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <div style="margin-left: 25px;margin-top: 3px;"><label
+                                                    style="INLINE-SIZE: max-content;MARGIN: 5PX;">or high</label></div>
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                                <div style="display:flex ; justify-content:space-between; margin-top: 10px;">
+                                    <a  class="link1" (click)="rating(5)">
+
+
+                                        <div style="width: 100%; display: flex; justify-content: space-between;">
+
+                                            <button class="ratingbutton" >
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            </button>
+                                            <div style="margin-left: 25px;margin-top: 3px;"><label
+                                                    style="INLINE-SIZE: max-content;MARGIN: 5PX;">or high</label></div>
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    About
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+                            <div class="card-body">
+                                <a href="#">Page 1</a>
+                                <a href="#">Page 2</a>
+                                <a href="#">Page 3</a>
+                            </div>
+                        </div>
+                    </div>
+                </li> -->
+                <li>
+                    <div class="card"> 
+                        <div class="card-header" (click)="toggleCollapse('collapseThree')">
+                            <h5 class="mb-0">
+                                <button class="accordion-button" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Price
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
+                            <div class="card-body priceinput">
+                                <input class="form-control pricefiled" type="text" #min placeholder="Low">
+                                <label style="margin-top: 4px;">to</label>
+                                <input class="form-control pricefiled" type="text" #max placeholder="high">
+                            </div>
+                            <div style="width: 100%;"><button class="pricebutton" (click)="price(min.value,max.value)">set</button></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <div class="card-header" (click)="toggleCollapse('collapseFour')">
+                            <h5 class="mb-0">
+                                <button class="accordion-button" type="button" data-toggle="collapse"
+                                    data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    language
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Arabic 
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        English
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        France
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                     Germany
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button style="border: none;height: 30px;" (click)="Reset()">Reset</button>
+                    </div>
+                </li>
+            </ul>
+
+            
+
+
+
+
+
+        </nav>
+        <!-- <div class="overlay" [class.active]="sidebarActive" (click)="toggleSidebar()"></div> -->
+
+    </div>
+    
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sec-nav">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" (click)="toggleSidebar()" class="filterButton">
+                    <!-- <i class="fas fa-align-left"></i> -->
+                    <span>filter</span>
+                </button>
+
+                    <input class="form-control me-2" type="search" placeholder="Search" #serachInput  [value]="searchNow"
+                        style="border-radius: 9px; height: 40px; width: 300px">
+                    <button class="searchButton" style="margin-left: 5px;" (click)="serach(serachInput.value)">Search</button>
+
+                <div class="dropdown-center">
+                    <button class="btn dropdown-toggle filterButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort By </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"  (click)="sort('latest')">Latest</a></li>
+                        <li><a class="dropdown-item"  (click)="sort('priceLow')">Price(Low > High)</a></li>
+                        <li><a class="dropdown-item" (click)="sort('priceHigh')">Price(High > Low)</a></li>
+                        <li><a class="dropdown-item"  (click)="sort('ratingHigh')">Rating(Highest)</a></li>
+                        <li><a class="dropdown-item" (click)="sort('ratingLow')">Rating(Lowest)</a></li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- course card -->
+        <div class="course">
+            <div class="cardd" *ngFor="let courses of getPaginatedData()">
+                <div class="mainimage"><img src="{{courses.picture}}"></div>
+                <div  style="margin-top: 10px;display: flex;justify-content: space-between;align-items: center; width: 95%;margin: auto;">
+                   <div style="margin-bottom: 5px;"> 
+                    <h1 style="margin:-5px;">{{courses.courseName}}</h1>
+                    <i class="bi bi-star-fill stars"*ngFor="let _ of [].constructor(courses.rating||0)"></i>
+                    <i class="bi bi-star stars"  *ngFor="let _ of [].constructor(5-courses.rating||0)"></i>
+            
+                </div>
+                <h2>{{courses.couresValue}}$</h2>
+                </div>
+                <div class="discreb">
+                    <p>{{courses.couresDescription}}</p>
+                </div>
+                <div class="cardTecher">
+                    <div style="display: flex; align-items: center;"><img src="{{courses.teacherPicture}}" alt="">
+                        <h4 style="margin: 0; margin-left: 10px;">{{ capitalizeFirstLetter(courses.teacherName) }}</h4>
+                    </div>
+                    <label style="margin-top: 5px; font-size: medium; font-weight: bold;">students: {{courses.numberOfStudents}}</label>
+                </div>
+                <div style="display:flex ; justify-content:center;align-items: center;padding-top:10px ;">
+                 
+                    <button class="Btn" routerLink="/course/{{courses.courseId}}">
+
+                        <div class="sign">Join
+                        </div>
+
+                    </button>
+                </div>
+            </div>
+            
+            
+
+
+
+        </div>
+        <div class="pagination">
+            <button [disabled]="currentPage == 1" (click)="onPageChange(currentPage - 1)">Previous</button>
+            
+            <button *ngFor="let page of getPageNumbers()"
+                    [class.active]="currentPage === page"
+                    (click)="onPageChange(page)">
+              {{ page }}
+            </button>
+            
+            <button [disabled]="currentPage == totalPages" (click)="onPageChange(currentPage + 1)">Next</button>
+          </div> </div>
+   
+</div>
+        <!-- end course card -->
+        <div *ngIf="isLoading" class="load">
+            <div class="one"></div>
+            <div class="two"></div>
+            <div class="three"></div>
+          </div>
+          
