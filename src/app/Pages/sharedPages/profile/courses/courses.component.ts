@@ -25,7 +25,7 @@ export class CoursesComponent implements OnDestroy{
        this.subscription = this.services.getUserInformation(userid,token).subscribe((response)=>{
         this.userData=response
         this.imageUrl=this.userData.usersPictrues;
-        const url = `https://localhost:7225/api/courses/get user courses/${token}/${userid}`;
+        const url = `http://corzacademy.runasp.net/api/courses/get user courses/${token}/${userid}`;
         
         return this.http.post(url,{}).subscribe((response)=>{
           this.coursesDeitel=response

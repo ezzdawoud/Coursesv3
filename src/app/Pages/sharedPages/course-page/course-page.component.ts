@@ -78,7 +78,7 @@ export class CoursePageComponent {
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
-    const url = `https://localhost:7225/api/courses/checkRating/${token}/${userid}/${this.idOfCourse.id}`;
+    const url = `http://corzacademy.runasp.net/api/courses/checkRating/${token}/${userid}/${this.idOfCourse.id}`;
     this.Http.post(url, {}).subscribe(
       (response:any) => {
         if(response!=null){
@@ -119,7 +119,7 @@ export class CoursePageComponent {
       }
       else {
         console.log(this.idOfCourse)
-        const url = `https://localhost:7225/api/courses/updateCourseRating/${token}/${userid}/${this.idOfCourse.id}/${this.rating}`;
+        const url = `http://corzacademy.runasp.net/api/courses/updateCourseRating/${token}/${userid}/${this.idOfCourse.id}/${this.rating}`;
         this.Http.post(url,{}).subscribe((response:any) => {
           Swal.fire({
             title: "Success",
@@ -183,7 +183,7 @@ async showCardInputAlert() {
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
       const cardNumberInt = parseInt(cardNumber, 10);
-    const url = `https://localhost:7225/api/Enrollment/Enrollment/${token}/${userid}/${this.idOfCourse.id}/${cardNumber}`;
+    const url = `http://corzacademy.runasp.net/api/Enrollment/Enrollment/${token}/${userid}/${this.idOfCourse.id}/${cardNumber}`;
      this.Http.post(url,{}).subscribe((response:any)=>{
     Swal.fire(response.message);
     },(error)=>{

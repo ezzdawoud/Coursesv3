@@ -164,7 +164,7 @@ if(this.updateDataForm.get("phone").hasError("required")){
     var name=this.updateDataForm.get('userName').value;
     var number=this.updateDataForm.get('phone').value;
     this.isLoading=true;
-    const url = `https://localhost:7225/api/Users/update user data/${userid}/${token}/${name}/${number}`;
+    const url = `http://corzacademy.runasp.net/api/Users/update user data/${userid}/${token}/${name}/${number}`;
     this.http.post(url, {}).subscribe((response:any) => {
       Swal.fire({
         title: "Success",

@@ -15,8 +15,9 @@ constructor(private http :HttpClient){
   if (usersData && usersData.length > 0) {
 this.isLogin=true;
 }
-const url = `https://localhost:7225/api/courses/get most common courses`;
-this.http.post(url,{}).subscribe((response:any) => {
+var x=1
+const url = `http://corzacademy.runasp.net/api/courses/get most common courses/${x}`;
+this.http.get(url).subscribe((response:any) => {
 this.cards=response
 
 })
