@@ -14,6 +14,7 @@ export class SecurityComponent implements OnDestroy{
   usersDatalocal: any = localStorage.getItem("user");
   userData:any={}
   subscription:Subscription|undefined;
+  isLoading=true;
 
   constructor(private services:ServicesService,private router:Router){
     
@@ -25,8 +26,10 @@ export class SecurityComponent implements OnDestroy{
     console.log(response)
 
     this.imageUrl=this.userData.usersPictrues;
+    this.isLoading=false;
   },(error)=>{
   this.router.navigate(["/signin"])
+  this.isLoading=false;
   })
     }
 

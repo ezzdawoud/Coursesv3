@@ -17,6 +17,7 @@ userData:any={}
 updateDataForm:any;
 imageUrl: string | undefined;
 subscription:Subscription|undefined;
+isLoading=true;
 
 constructor(private services:ServicesService,private router:Router,private form:FormBuilder,private http:HttpClient){
   
@@ -34,6 +35,8 @@ constructor(private services:ServicesService,private router:Router,private form:
     
   })
   this.imageUrl=this.userData.usersPictrues;
+  this.isLoading=false;
+
 },(error)=>{
 this.router.navigate(["/signin"])
 })
@@ -160,6 +163,7 @@ if(this.updateDataForm.get("phone").hasError("required")){
     var token = JSON.parse(this.usersDatalocal!).usertoken;
     var name=this.updateDataForm.get('userName').value;
     var number=this.updateDataForm.get('phone').value;
+    this.isLoading=true;
     const url = `https://localhost:7225/api/Users/update user data/${userid}/${token}/${name}/${number}`;
     this.http.post(url, {}).subscribe((response:any) => {
       Swal.fire({
@@ -170,12 +174,15 @@ if(this.updateDataForm.get("phone").hasError("required")){
       this.updateDataForm.get('userName').disable();
       this.updateDataForm.get('phone').disable();
        this.isEditingVar=true;
+       this.isLoading=false;
     },(error)=>{
       Swal.fire({
         title: "Error",
         text: error.error.message,
         icon: "error"
-      });     
+      });   
+      this.isLoading=false;
+  
     }
   
   )

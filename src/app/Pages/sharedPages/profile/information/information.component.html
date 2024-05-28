@@ -1,3 +1,4 @@
+<div *ngIf="!isLoading" style="width: 100%;">
 <div class="iconn">
     <div class="singlicon">
         <button class="b1 bbh" [routerLink]="['/profile']">
@@ -77,3 +78,10 @@
     </div>
 </div>
 </form>
+</div>
+
+<div *ngIf="isLoading" class="load">
+    <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+  </div>

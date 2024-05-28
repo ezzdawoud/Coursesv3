@@ -1,3 +1,4 @@
+<div style="width: 100%;" *ngIf="!isLoading">
 <div class="iconn">
   <div class="singlicon">
       <button class="b1" [routerLink]="['/profile']">
@@ -43,3 +44,11 @@
 
 
 </div>
+
+</div>
+
+<div *ngIf="isLoading" class="load">
+    <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+  </div>
