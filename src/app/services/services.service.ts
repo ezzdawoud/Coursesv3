@@ -39,14 +39,22 @@ getUserInformation(id:string,token:string){
   return this.http.post(url,data);
 }
 getTeacherData(id:string,token:string){
-  const url = `https://corzacademy.runasp.net/api/teacher/get Teacher Data/${id}/${token}`;
-  return this.http.post(url, {});
+  const request={
+    "id":id,
+    "token":token
+  }
+  const url = `https://corzacademy.runasp.net/api/teacher/get Teacher Data`;
+  return this.http.post(url, request);
 
 }
 
 getTeacherCourses(id:string,token:string){
-  const url = `https://corzacademy.runasp.net/api/courses/get teacher courses/${token}/${id}`;
-  return this.http.post(url, {});
+  const request={
+    "id":id,
+    "token":token
+  }
+  const url = `https://corzacademy.runasp.net/api/courses/get teacher courses`;
+  return this.http.post(url, request);
 
 }
 
