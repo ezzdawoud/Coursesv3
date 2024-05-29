@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class CreateaccountComponent {
   creatAccount:any;
-  constructor(private form: FormBuilder) {
+  constructor(private form: FormBuilder,private http:HttpClient,private router:Router) {
     this.creatAccount = this.form.group({
       Name: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
       userEmail: ["", [Validators.email, Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
@@ -57,7 +59,6 @@ else{
   validLableName=""
   validLablePhoneNumber=""
   createAccount(){
-    console.log("ss")
    let isValid=false;
    if(this.creatAccount.get("Name").hasError("required")){
     this.validLableName="This field is required"
@@ -114,6 +115,25 @@ else{
         "phoneNumber": this.creatAccount.get('PhoneNumber').value,
         "usersPictrues": null
       }
+
+      const url = `https://corzacademy.runasp.net/api/Users/register`;
+      this.http.post(url,newUser).subscribe((response:any) => {
+        Swal.fire({
+          title: "Success",
+          text: response.message,
+          icon: "success"
+        }).then(()=>{
+this.router.navigate(["/signin"])
+        });        },(error)=>{
+          Swal.fire({
+            title: "Error",
+            text: error.message,
+            icon: "error"
+          })
+        }
+      
+      )
+      
       
     }
   }
