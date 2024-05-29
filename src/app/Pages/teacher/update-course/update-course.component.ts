@@ -23,9 +23,13 @@ courseId:any;
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
       var id = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
-     
-    const url = `https://corzacademy.runasp.net/api/courses/getCourseDataForTeacher/${token}/${id}/${this.courseId.courseId}`;
-this.http.post(url,{}).subscribe((response)=>{
+      const request={
+        "token":token,
+        "userId":id,
+        "courseId":this.courseId.courseId
+        }    
+    const url = `https://corzacademy.runasp.net/api/courses/getCourseDataForTeacher`;
+this.http.post(url,request).subscribe((response)=>{
   this.courseData=response;
   console.log(this.courseData)
   this.form.patchValue({

@@ -25,9 +25,14 @@ export class AddLessonsComponent {
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
-      this.route.params.subscribe((parms) => { this.idOfCourse = parms })
-      const url = `https://corzacademy.runasp.net/api/courses/getCourseDataForTeacher/${token}/${userid}/${this.idOfCourse.courseId}`;
-      this.http.post(url,{}).subscribe((response)=>{
+      this.route.params.subscribe((parms) => { this.idOfCourse = parms 
+const request={
+"token":token,
+"userId":userid,
+"courseId":this.idOfCourse.courseId
+}     
+      const url = `https://corzacademy.runasp.net/api/courses/getCourseDataForTeacher`;
+      this.http.post(url,request).subscribe((response)=>{
 
       },
       (error)=>{
@@ -40,7 +45,7 @@ export class AddLessonsComponent {
         });   
       }
     
-    )
+    )})
     }
   }
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
