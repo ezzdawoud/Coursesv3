@@ -58,6 +58,7 @@ else{
   validLablePassword=""
   validLableName=""
   validLablePhoneNumber=""
+  validName=false;
   createAccount(){
    let isValid=false;
    if(this.creatAccount.get("Name").hasError("required")){
@@ -71,8 +72,13 @@ else{
     this.validLableName="length must be between 4-16"
 
    }
+   else if(/\s/.test(this.creatAccount.get("Name").value)){
+    this.validLableName="without spacing"
+    this.validName=false;
+   }
    else{
     this.validLableName=""
+    this.validName=true
    }
     if(this.creatAccount.get('userEmail').hasError('required')){
       this.validLableEmail="This field is required"
@@ -107,7 +113,7 @@ else{
     else{
       this.validLablePhoneNumber=""
     }
-    if(this.creatAccount.valid && this.validPassword){
+    if(this.creatAccount.valid && this.validPassword&&this.validName){
       let newUser={
         "userName":this.creatAccount.get("Name").value ,
         "email": this.creatAccount.get('userEmail').value,
@@ -125,10 +131,9 @@ else{
         }).then(()=>{
 this.router.navigate(["/signin"])
         });        },(error)=>{
-          console.log(error)
           Swal.fire({
             title: "Error",
-            text: error.message,
+            text: error.error.message,
             icon: "error"
           })
         }
