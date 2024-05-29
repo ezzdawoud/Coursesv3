@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-confierm-email',
@@ -9,17 +10,30 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class ConfiermEmailComponent {
   done=""
-constructor(private parms:ActivatedRoute,private http:ServicesService){
+  isLoading=true;
+
+constructor(private parms:ActivatedRoute,private http:ServicesService,private router:Router){
 this.parms.params.subscribe(data=>{
   var id=data["id"];
   var token=decodeURIComponent(data['token']);;
-  this.http.confiermEmail(id,token).subscribe((response)=>{
-    console.log("done")
+  this.http.confiermEmail(id,token).subscribe((response:any)=>{
+    this.isLoading=false;
+    Swal.fire({
+      title: "Success",
+      text: response.message,
+      icon: "success"
+    }).then(()=>{
+this.router.navigate(["/signin"])
+    });  
   },
 (error)=>{
-  console.log(error)
+  this.isLoading=false;
+  Swal.fire({
+    title: "Success",
+    text: error.message,
+    icon: "success"
+  })
 })
-console.log(id,token)
 })
 }
 }

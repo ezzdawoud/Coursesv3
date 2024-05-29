@@ -116,6 +116,7 @@ else{
       this.validLablePhoneNumber=""
     }
     if(this.creatAccount.valid && this.validPassword&&this.validName){
+      this.isLoading=true;
       let newUser={
         "userName":this.creatAccount.get("Name").value ,
         "email": this.creatAccount.get('userEmail').value,
@@ -126,7 +127,6 @@ else{
 
       const url = `https://corzacademy.runasp.net/api/Users/register`;
       this.http.post(url,newUser).subscribe((response:any) => {
-        this.isLoading=true;
         Swal.fire({
           title: "Success",
           text: response.message,
