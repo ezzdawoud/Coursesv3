@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class CreateaccountComponent {
   creatAccount:any;
+  isLoading=false;
+
   constructor(private form: FormBuilder,private http:HttpClient,private router:Router) {
     this.creatAccount = this.form.group({
       Name: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
@@ -124,13 +126,17 @@ else{
 
       const url = `https://corzacademy.runasp.net/api/Users/register`;
       this.http.post(url,newUser).subscribe((response:any) => {
+        this.isLoading=true;
         Swal.fire({
           title: "Success",
           text: response.message,
           icon: "success"
         }).then(()=>{
+          this.isLoading=false;
+
 this.router.navigate(["/signin"])
         });        },(error)=>{
+          this.isLoading=false;
           Swal.fire({
             title: "Error",
             text: error.error.message,
