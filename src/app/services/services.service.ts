@@ -59,8 +59,12 @@ getcourseDeitle(courseId:number){
   return this.http.post(url, {});
 }
 confiermEmail(id:string,token:string){
-   const url = `https://corzacademy.runasp.net/api/Users/confirmemail/${id}/${token}`;
-  return this.http.post(url,{});
+  const request={
+    "userId":id,
+    "token":token
+  }
+   const url = `https://corzacademy.runasp.net/api/Users/confirmemail`;
+  return this.http.post(url,request);
 }
 
 register(user:any){
