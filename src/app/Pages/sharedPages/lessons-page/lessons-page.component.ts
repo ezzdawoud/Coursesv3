@@ -34,13 +34,20 @@ userid="";
       var userid = JSON.parse(this.usersDatalocal!).id;
       this.userid=userid;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
+      const requset={
+        "courseId":this.idOfCourse,
+        "lessonsNumber":this.idOfLessons,
+        "id":userid,
+        "token":token
+      }
       this.services.checkCourse(userid, token, this.idOfCourse).subscribe((response) => {
-        const url = `http://corzacademy.runasp.net/api/lessons/getlessons/${this.idOfCourse}/${this.idOfLessons}/${userid}/${token}`;
-        this.http.post(url, {}).subscribe((response) => {
+        const url = `https://corzacademy.runasp.net/api/lessons/getlessons`;
+        this.http.post(url, requset).subscribe((response) => {
           this.lessonsDate = response;
           this.videourl = 'https://player.cloudinary.com/embed/?public_id=' + this.lessonsDate.lesson.url + '&cloud_name=dolmafyz2&player[controls]=true&player[showLogo]=false&player[fluid]=true';
-          const url = `http://corzacademy.runasp.net/api/lessons/get lessons comment/${this.idOfCourse}/${this.idOfLessons}/${userid}/${token}`;
-          this.http.post(url, {}).subscribe((response) => {
+      
+          const url = `https://corzacademy.runasp.net/api/lessons/get lessons comment`;
+          this.http.post(url, requset).subscribe((response) => {
             this.comments=response;
             console.log(this.comments)
           },(error)=>{})
@@ -106,8 +113,15 @@ this.commentsChecker=true;
       if (this.usersDatalocal && this.usersDatalocal.length > 0) {
         var userid = JSON.parse(this.usersDatalocal!).id;
         var token = JSON.parse(this.usersDatalocal!).usertoken;
-    const url = `http://corzacademy.runasp.net/api/lessons/Add comments/${this.idOfCourse}/${this.idOfLessons}/${userid}/${token}/${value.value}`;
-    this.http.post(url, {}).subscribe((response) => {
+        const request={
+          "courseId":this.idOfCourse,
+          "lessonsNumber":this.idOfLessons,
+          "id":userid,
+          "token":token,
+          "comments":value.value
+        }
+    const url = `https://corzacademy.runasp.net/api/lessons/Add comments`;
+    this.http.post(url, request).subscribe((response) => {
 this.comments.unshift(response);
 value.value = "";
     })
@@ -131,8 +145,16 @@ delteComment(value:number,index:number,commentType:number,subCommentIndex:number
       else{
        this.comments[index].comment.subComments.splice(subCommentIndex,1);
       }
-const url = `http://corzacademy.runasp.net/api/lessons/delete comment/${this.idOfCourse}/${this.idOfLessons}/${userid}/${token}/${value}/${commentType}`;
-this.http.post(url, {}).subscribe((response) => {
+      const request={
+        "courseId":this.idOfCourse,
+        "lessonsNumber":this.idOfLessons,
+        "id":userid,
+        "token":token,
+        "commentId":value,
+        "commentType":commentType
+      }
+const url = `https://corzacademy.runasp.net/api/lessons/delete comment`;
+this.http.post(url, request).subscribe((response) => {
 
   
 })
@@ -159,8 +181,16 @@ addSubComment(value:any,commentsId:number,index:number){
           if (this.usersDatalocal && this.usersDatalocal.length > 0) {
             var userid = JSON.parse(this.usersDatalocal!).id;
             var token = JSON.parse(this.usersDatalocal!).usertoken;
-            const url = `http://corzacademy.runasp.net/api/lessons/add Sub comment/${this.idOfCourse}/${this.idOfLessons}/${userid}/${token}/${commentsId}/${value.value}`;
-            this.http.post(url, {}).subscribe((response) => {
+            const request={
+              "courseId":this.idOfCourse,
+              "lessonsNumber":this.idOfLessons,
+              "id":userid,
+              "token":token,
+              "commentId":commentsId,
+              "comments":value.value
+            }
+            const url = `https://corzacademy.runasp.net/api/lessons/add Sub comment`;
+            this.http.post(url, request).subscribe((response) => {
               console.log(response);
               console.log(this.comments[index].comment.subComments);
               this.comments[index].comment.subComments.push(response);
@@ -193,7 +223,7 @@ addLikeReaction(commentId:number,reaction:boolean,commentType:number,index:numbe
     this.comments[index].comment.subComments[indexSubComment].Like=this.comments[index].comment.subComments[indexSubComment].like++;
 
   }
-  const url = `http://corzacademy.runasp.net/api/lessons/add reaction`;
+  const url = `https://corzacademy.runasp.net/api/lessons/add reaction`;
 this.http.post(url, newReation).subscribe((response) => {
 
 })
@@ -222,7 +252,7 @@ addDisLikeReaction(commentId:number,reaction:boolean,commentType:number,index:nu
     this.comments[index].comment.subComments[indexSubComment].disLike=this.comments[index].comment.subComments[indexSubComment].dislike++;
 
   }
-  const url = `http://corzacademy.runasp.net/api/lessons/add reaction`;
+  const url = `https://corzacademy.runasp.net/api/lessons/add reaction`;
 this.http.post(url, newReation).subscribe((response) => {
 
 })
@@ -242,8 +272,14 @@ deleteLikeReaction(commentId:number,commentType:number,index:number,indexSubComm
         this.comments[index].comment.subComments[indexSubComment].Like=this.comments[index].comment.subComments[indexSubComment].like--;
     
       }
-  const url = `http://corzacademy.runasp.net/api/lessons/delete reaction/${userid}/${token}/${commentId}/${commentType}`;
-this.http.post(url, {}).subscribe((response) => {
+      const request={
+        "id":userid,
+        "token":token,
+        "commentId":commentId,
+        "commentType":commentType
+      }
+  const url = `https://corzacademy.runasp.net/api/lessons/delete reaction`;
+this.http.post(url, request).subscribe((response) => {
 
 })
 }
@@ -262,8 +298,14 @@ deleteDisLikeReaction(commentId:number,commentType:number,index:number,indexSubC
         this.comments[index].comment.subComments[indexSubComment].disLike=this.comments[index].comment.subComments[indexSubComment].dislike--;
     
       }
-  const url = `http://corzacademy.runasp.net/api/lessons/delete reaction/${userid}/${token}/${commentId}/${commentType}`;
-this.http.post(url, {}).subscribe((response) => {
+      const request={
+        "id":userid,
+        "token":token,
+        "commentId":commentId,
+        "commentType":commentType
+      }
+  const url = `https://corzacademy.runasp.net/api/lessons/delete reaction`;
+this.http.post(url, request).subscribe((response) => {
 
 })
 }

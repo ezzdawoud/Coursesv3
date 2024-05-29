@@ -39,7 +39,7 @@ export class ChangeEmailComponent {
       "token": this.token
     }
     
-    this.http.post('http://corzacademy.runasp.net/api/Users/verify-email-change-token',confierm)
+    this.http.post('https://corzacademy.runasp.net/api/Users/verify-email-change-token',confierm)
       .subscribe(
         response => {
           this.tokenVerified = true;
@@ -59,7 +59,7 @@ export class ChangeEmailComponent {
         "token": this.token,
         "newEmail": newEmail
       }
-      this.http.post('http://corzacademy.runasp.net/api/Users/change-email', changeEmail)
+      this.http.post('https://corzacademy.runasp.net/api/Users/change-email', changeEmail)
         .subscribe(
           (response:any) => {
             Swal.fire({

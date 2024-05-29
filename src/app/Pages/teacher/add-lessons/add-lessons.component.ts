@@ -26,7 +26,7 @@ export class AddLessonsComponent {
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
       this.route.params.subscribe((parms) => { this.idOfCourse = parms })
-      const url = `http://corzacademy.runasp.net/api/courses/getCourseDataForTeacher/${token}/${userid}/${this.idOfCourse.courseId}`;
+      const url = `https://corzacademy.runasp.net/api/courses/getCourseDataForTeacher/${token}/${userid}/${this.idOfCourse.courseId}`;
       this.http.post(url,{}).subscribe((response)=>{
 
       },

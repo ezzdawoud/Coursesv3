@@ -23,7 +23,7 @@ export class ChangePasswordComponent {
     "Email": this.email,
     "Token": this.token
   }
-  const url = `http://corzacademy.runasp.net/api/Users/confirm-password-change-token`;
+  const url = `https://corzacademy.runasp.net/api/Users/confirm-password-change-token`;
     
   this.http.post(url, requset).subscribe((response:any)=>{
 this.tokenVerified=true
@@ -112,7 +112,7 @@ else{
       isValid=true;
      }
     if(isValid && this.validPassword && this.confiermPassrodValid && this.validpasswordlabelvalid){
-      const url = `http://corzacademy.runasp.net/api/Users/reset-password`;
+      const url = `https://corzacademy.runasp.net/api/Users/reset-password`;
       var password=this.changePasswordFrom.get("passwrod").value;
       console.log(password)
      var reset= {

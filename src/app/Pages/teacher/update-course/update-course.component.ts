@@ -24,7 +24,7 @@ courseId:any;
       var id = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
      
-    const url = `http://corzacademy.runasp.net/api/courses/getCourseDataForTeacher/${token}/${id}/${this.courseId.courseId}`;
+    const url = `https://corzacademy.runasp.net/api/courses/getCourseDataForTeacher/${token}/${id}/${this.courseId.courseId}`;
 this.http.post(url,{}).subscribe((response)=>{
   this.courseData=response;
   console.log(this.courseData)
@@ -298,7 +298,7 @@ this.selectedImage=this.courseData.pictures
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
 
-    const url = `http://corzacademy.runasp.net/api/courses/delete course/${token}/${userid}/${this.courseId.courseId}`;
+    const url = `https://corzacademy.runasp.net/api/courses/delete course/${token}/${userid}/${this.courseId.courseId}`;
     Swal.fire({
       title: 'Do you want to delete this course?',
       showDenyButton: true,

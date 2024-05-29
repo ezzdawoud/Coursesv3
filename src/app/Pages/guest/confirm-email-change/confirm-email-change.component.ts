@@ -15,7 +15,7 @@ constructor(private parms:ActivatedRoute,private http :HttpClient){
     var token=decodeURIComponent(data['token']);
     var newEmail=data["newEmail"]
 
-    const url = `http://corzacademy.runasp.net/api/Users/confirm-new-email/${id}/${token}/${newEmail}`;
+    const url = `https://corzacademy.runasp.net/api/Users/confirm-new-email/${id}/${token}/${newEmail}`;
     this.http.post(url, {}).subscribe((response:any)=>{
       Swal.fire({
         title: "success",

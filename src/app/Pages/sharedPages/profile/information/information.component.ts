@@ -164,8 +164,14 @@ if(this.updateDataForm.get("phone").hasError("required")){
     var name=this.updateDataForm.get('userName').value;
     var number=this.updateDataForm.get('phone').value;
     this.isLoading=true;
-    const url = `http://corzacademy.runasp.net/api/Users/update user data/${userid}/${token}/${name}/${number}`;
-    this.http.post(url, {}).subscribe((response:any) => {
+    const request={
+      "id":userid,
+      "token":token,
+      "name":name,
+      "phoneNumber":number
+    }
+    const url = `https://corzacademy.runasp.net/api/Users/update user data`;
+    this.http.post(url, request).subscribe((response:any) => {
       Swal.fire({
         title: "Success",
         text: response.message,
