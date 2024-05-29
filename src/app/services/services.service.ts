@@ -84,8 +84,8 @@ insertCourse(id:string,token:string,course:any){
   const url = `https://corzacademy.runasp.net/api/courses/insert Course/${id}/${token}`;
   return this.http.post(url,course);
 }
-updatecouese(id:string,token:string,courseId:number,course:any){
-  const url = `https://corzacademy.runasp.net/api/courses/update course/${token}/${id}/${courseId}`;
+updatecouese(course:any){
+  const url = `https://corzacademy.runasp.net/api/courses/update course`;
   return this.http.post(url,course);
 }
 uploadcourseImage(id:string,token:string,courseId:number,file:any){

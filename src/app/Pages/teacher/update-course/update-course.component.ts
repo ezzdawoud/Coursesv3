@@ -259,16 +259,18 @@ this.selectedImage=this.courseData.pictures
         var token = JSON.parse(this.usersDatalocal!).usertoken;
 
         let course = {
-          couresName: this.form.get("couresName").value,
-          couresDescription: this.form.get("couresDescription").value,
-          couresType: this.form.get("couresType").value,
-          coursesCatagory: this.form.get("coursesCatagory").value,
-          couresLanguage: this.form.get("couresLanguage").value,
-          couresValue: this.form.get("couresValue").value,
-          usersId: userid,
-          pictures: "https://res.cloudinary.com/dolmafyz2/image/upload/v1713007441/jsnplpujnxbw9offwblm.png"
+          "couresName": this.form.get("couresName").value,
+          "couresDescription": this.form.get("couresDescription").value,
+          "couresType": this.form.get("couresType").value,
+          "coursesCatagory": this.form.get("coursesCatagory").value,
+          "couresLanguage": this.form.get("couresLanguage").value,
+          "couresValue": this.form.get("couresValue").value,
+          "usersId": userid,
+          "token":token,
+          "courseId":this.courseId.courseId
+          
         }
-        this.services.updatecouese(userid, token,this.courseId.courseId, course).subscribe((response: any) => {
+        this.services.updatecouese(course).subscribe((response: any) => {
           // if (this.form.get("file").value != null) {
           //   let fileToUpload = <File>file[0];
           //   const formData = new FormData();
