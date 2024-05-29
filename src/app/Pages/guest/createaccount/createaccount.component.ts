@@ -125,6 +125,7 @@ else{
         }).then(()=>{
 this.router.navigate(["/signin"])
         });        },(error)=>{
+          console.log(error)
           Swal.fire({
             title: "Error",
             text: error.message,
