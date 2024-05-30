@@ -29,9 +29,9 @@ this.router.navigate(["/signin"])
 (error)=>{
   this.isLoading=false;
   Swal.fire({
-    title: "Success",
+    title: "error",
     text: error.message,
-    icon: "success"
+    icon: "error"
   })
 })
 })
