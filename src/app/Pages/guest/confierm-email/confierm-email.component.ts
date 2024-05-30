@@ -27,6 +27,7 @@ this.router.navigate(["/signin"])
     });  
   },
 (error)=>{
+  console.log(error)
   this.isLoading=false;
   Swal.fire({
     title: "error",
