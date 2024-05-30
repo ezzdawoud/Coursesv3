@@ -303,8 +303,12 @@ this.selectedImage=this.courseData.pictures
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
-
-    const url = `https://corzacademy.runasp.net/api/courses/delete course/${token}/${userid}/${this.courseId.courseId}`;
+const request={
+  "token":token,
+  "userId":userid,
+  "courseId":this.courseId.courseId
+}
+    const url = `https://corzacademy.runasp.net/api/courses/delete course`;
     Swal.fire({
       title: 'Do you want to delete this course?',
       showDenyButton: true,
@@ -313,7 +317,7 @@ this.selectedImage=this.courseData.pictures
       denyButtonText: 'No',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.http.delete(url).subscribe((response)=>{
+        this.http.post(url,request).subscribe((response)=>{
           Swal.fire({
             title: "success",
             text: "delete done",
