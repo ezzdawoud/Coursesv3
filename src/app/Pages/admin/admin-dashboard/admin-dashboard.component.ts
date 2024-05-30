@@ -67,7 +67,7 @@ constructor(private http:HttpClient){
   })
 
   const url2=`https://corzacademy.runasp.net/api/Users/getData`
-  this.http.post(url2,request).subscribe((response:any)=>{
+  this.http.post(url2,{"id":userid,"token":token}).subscribe((response:any)=>{
     this.pieChartData=response.pieChartData
     this.AdminData=response
     this.chartData = [
