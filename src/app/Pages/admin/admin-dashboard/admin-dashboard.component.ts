@@ -64,13 +64,10 @@ constructor(private http:HttpClient){
     this.originalUsersData=response.users
   this.teachersData=response.teacher
   this.originalTeachersData=response.teacher
-  })}
-  const request={
-    "id":userid,
-    "token":token
-  }
-  const url=`https://corzacademy.runasp.net/api/admin/get admin Data`
-  this.http.post(url,request).subscribe((response:any)=>{
+  })
+
+  const url2=`https://corzacademy.runasp.net/api/admin/get admin Data`
+  this.http.post(url2,request).subscribe((response:any)=>{
     this.pieChartData=response.pieChartData
     this.AdminData=response
     this.chartData = [
@@ -83,7 +80,7 @@ constructor(private http:HttpClient){
       }
     ];
 
-  })
+  })}
 }
 
 usersData: any[] = [];
