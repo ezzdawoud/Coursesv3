@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { PaginationServiceService } from 'src/app/pagination-service.service';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -9,55 +10,153 @@ import { PaginationServiceService } from 'src/app/pagination-service.service';
 })
 export class AdminDashboardComponent {
   usersDatalocal: any = localStorage.getItem("user");
+  view: [number, number] = [0, 400]; // Initial view width is 0, will be set dynamically
+  chartData: any[] = [];
+  pieChartData: any[] = [];
+  colorScheme: Color = {
+    name: 'customScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#5AA454', '#E44D25','#A44D25','#E44A25','#EAAD25',]
+  };
 
+  gradient: boolean = false;
+  showLegend: boolean = true;
+  showXAxis: boolean = true;
+  showYAxis: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Date';
+  showYAxisLabel: boolean = true;
+  yAxisLabel: string = 'Enrollment Value';
+
+  @ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef;
+
+
+
+  ngOnInit() {
+    this.setChartView();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.setChartView();
+  }
+
+  setChartView() {
+    const width = this.chartContainer.nativeElement.offsetWidth;
+    this.view = [width, 400];
+  }
+
+  
+
+  AdminData:any={roles:[{userCount:0},{userCount:0},{userCount:0}]};
 constructor(private http:HttpClient){
   if (this.usersDatalocal && this.usersDatalocal.length > 0) {
     var userid = JSON.parse(this.usersDatalocal!).id;
     var token = JSON.parse(this.usersDatalocal!).usertoken;
-    const url=`https://corzacademy.runasp.net/api/Users/get all users/${token}/${userid}`
+    const url=`https://corzacademy.runasp.net/api/Users/get all users and teacher/${token}/${userid}`
   this.http.get(url).subscribe((response:any)=>{
-    this.data=response
-    this.originalData=response
-    console.log(this.data)
+    this.usersData=response.users
+    this.originalUsersData=response.users
+  this.teachersData=response.teacher
+  this.originalTeachersData=response.teacher
   })}
+  const request={
+    "id":userid,
+    "token":token
+  }
+  const url=`https://corzacademy.runasp.net/api/admin/get admin Data`
+  this.http.post(url,request).subscribe((response:any)=>{
+    this.pieChartData=response.pieChartData
+    this.AdminData=response
+    this.chartData = [
+      {
+        name: 'Enrollments',
+        series: response.summaries.map((summary:any) => ({
+          name: new Date(summary.date).toLocaleDateString(),
+          value: summary.totalEnrollments
+        }))
+      }
+    ];
+
+  })
 }
 
-  data: any[]=[];
-  originalData:any
-  currentPage = 1;
-  pageSize = 10;
+usersData: any[] = [];
+teachersData: any[] = [];
+originalUsersData: any;
+originalTeachersData: any;
+currentPageUsers = 1;
+currentPageTeachers = 1;
+pageSize = 10;
 
-  get totalPages(): number {
-    return Math.ceil(this.data.length / this.pageSize);
-  }
 
-  get currentPageData(): any[] {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = Math.min(startIndex + this.pageSize, this.data.length);
-    return this.data.slice(startIndex, endIndex);
-  }
 
-  get pageNumbers(): number[] {
-    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
-  }
+get totalUsersPages(): number {
+  return Math.ceil(this.usersData.length / this.pageSize);
+}
 
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-    }
-  }
+get totalTeachersPages(): number {
+  return Math.ceil(this.teachersData.length / this.pageSize);
+}
 
-  prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
-  }
+get currentPageUsersData(): any[] {
+  const startIndex = (this.currentPageUsers - 1) * this.pageSize;
+  const endIndex = Math.min(startIndex + this.pageSize, this.usersData.length);
+  return this.usersData.slice(startIndex, endIndex);
+}
 
-  goToPage(pageNumber: number): void {
-    this.currentPage = pageNumber;
-  }
+get currentPageTeachersData(): any[] {
+  const startIndex = (this.currentPageTeachers - 1) * this.pageSize;
+  const endIndex = Math.min(startIndex + this.pageSize, this.teachersData.length);
+  return this.teachersData.slice(startIndex, endIndex);
+}
 
-  serachUser(value:string){
-    this.data = this.originalData.filter((m:any) => m.userName.includes(value));
+get usersPageNumbers(): number[] {
+  return Array.from({ length: this.totalUsersPages }, (_, index) => index + 1);
+}
+
+get teachersPageNumbers(): number[] {
+  return Array.from({ length: this.totalTeachersPages }, (_, index) => index + 1);
+}
+
+nextUsersPage(): void {
+  if (this.currentPageUsers < this.totalUsersPages) {
+    this.currentPageUsers++;
   }
+}
+
+prevUsersPage(): void {
+  if (this.currentPageUsers > 1) {
+    this.currentPageUsers--;
+  }
+}
+
+nextTeachersPage(): void {
+  if (this.currentPageTeachers < this.totalTeachersPages) {
+    this.currentPageTeachers++;
+  }
+}
+
+prevTeachersPage(): void {
+  if (this.currentPageTeachers > 1) {
+    this.currentPageTeachers--;
+  }
+}
+
+goToUsersPage(pageNumber: number): void {
+  this.currentPageUsers = pageNumber;
+}
+
+goToTeachersPage(pageNumber: number): void {
+  this.currentPageTeachers = pageNumber;
+}
+
+searchUsers(value: string): void {
+  this.usersData = this.originalUsersData.filter((user: any) => user.userName.includes(value));
+}
+
+searchTeachers(value: string): void {
+  this.teachersData = this.originalTeachersData.filter((teacher: any) => teacher.userName.includes(value));
+}
 }

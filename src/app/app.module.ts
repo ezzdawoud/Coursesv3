@@ -29,7 +29,7 @@ import { ConfirmEmailChangeComponent } from './Pages/guest/confirm-email-change/
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
    

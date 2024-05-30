@@ -227,9 +227,10 @@ export class AddCourseComponent {
           couresLanguage: this.form.get("couresLanguage").value,
           couresValue: this.form.get("couresValue").value,
           usersId: userid,
-          pictures: "https://res.cloudinary.com/dolmafyz2/image/upload/v1713007441/jsnplpujnxbw9offwblm.png"
+          pictures: "https://res.cloudinary.com/dolmafyz2/image/upload/v1713007441/jsnplpujnxbw9offwblm.png",
+          "token":token
         }
-        this.services.insertCourse(userid, token, course).subscribe((response: any) => {
+        this.services.insertCourse(course).subscribe((response: any) => {
           // if (this.form.get("file").value != null) {
           //   let fileToUpload = <File>file[0];
           //   const formData = new FormData();

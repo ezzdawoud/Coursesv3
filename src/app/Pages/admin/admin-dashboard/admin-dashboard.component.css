@@ -145,3 +145,101 @@
 td img {
     margin-right: 10px; /* Adjust the margin as needed */
   }
+
+  .dataOfAdmin .box{
+    width: 300px;
+    height: 150px;
+border-radius: 18px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+     background-color: #fff;
+     border: 1px solid rgba(0, 0, 0, 0.096);
+     box-shadow: 0px 0px 20px 0px #00000021;
+      }
+
+  .dataOfAdmin div .iconBackground{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+display: flex;
+justify-content: center;
+align-items: center;
+  }
+  .box label{
+    font-size: 25px;
+    
+  }
+  .navbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .navbar .logo {
+    flex: 1;
+  }
+  
+  .navbar .logo img {
+    width: 100px;
+  }
+  
+  .navbar .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .navbar .nav-links li {
+    margin-right: 20px;
+  }
+  
+  .navbar .nav-links li a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .navbar-toggle {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .navbar-toggle .icon {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+  }
+  
+
+  .chart-container {
+    position: relative;
+  }
+  
+  .chart-container {
+    position: relative;
+    overflow: auto; /* Ensure the chart overflow is hidden */
+  }
+  
+  .wave-line-chart .ngx-charts-line-series path {
+    animation: waveAnimation 2s ease-in-out infinite alternate; /* Adjust the animation duration and timing function as needed */
+  }
+  .legend {
+    display: flex;
+    justify-content: center; /* Center the legend horizontally */
+    margin-top: 10px; /* Adjust the top margin as needed */
+  }
+  @keyframes waveAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-10px); /* Adjust the vertical movement of the wave as needed */
+    }
+  }

@@ -80,8 +80,8 @@ register(user:any){
   return this.http.post(url,{user});
 }
 
-insertCourse(id:string,token:string,course:any){
-  const url = `https://corzacademy.runasp.net/api/courses/insert Course/${id}/${token}`;
+insertCourse(course:any){
+  const url = `https://corzacademy.runasp.net/api/courses/insert Course`;
   return this.http.post(url,course);
 }
 updatecouese(course:any){

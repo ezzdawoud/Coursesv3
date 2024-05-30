@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminDashboardRoutingModule } from './admin-dashboard-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { AdminDashboardComponent } from './admin-dashboard.component';
   ],
   imports: [
     CommonModule,
-    AdminDashboardRoutingModule
+    AdminDashboardRoutingModule,
+    NgxChartsModule,
+    
   ]
 })
 export class AdminDashboardModule { }
