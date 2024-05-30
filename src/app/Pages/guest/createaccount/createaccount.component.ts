@@ -17,8 +17,8 @@ export class CreateaccountComponent {
     this.creatAccount = this.form.group({
       Name: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
       userEmail: ["", [Validators.email, Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      password: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-      PhoneNumber: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(16)]]
+      password: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      PhoneNumber: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(16)]]
     })
   }
   
@@ -95,10 +95,10 @@ else{
       this.validLablePassword="This field is required"
     }
     else if(this.creatAccount.get('password').hasError('minlength') ){
-      this.validLablePassword="length must be between 4-16"
+      this.validLablePassword="length must be between 8-16"
     }
     else if(this.creatAccount.get('password').hasError('maxlength')){
-      this.validLablePassword="length must be between 4-16"
+      this.validLablePassword="length must be between 8-16"
     }
     else{
       this.validLablePassword=""
