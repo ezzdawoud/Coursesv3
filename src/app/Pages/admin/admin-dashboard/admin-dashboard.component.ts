@@ -54,8 +54,12 @@ constructor(private http:HttpClient){
   if (this.usersDatalocal && this.usersDatalocal.length > 0) {
     var userid = JSON.parse(this.usersDatalocal!).id;
     var token = JSON.parse(this.usersDatalocal!).usertoken;
-    const url=`https://corzacademy.runasp.net/api/Users/get all users and teacher/${token}/${userid}`
-  this.http.get(url).subscribe((response:any)=>{
+    const request={
+      "id":userid,
+      "token":token
+    }
+    const url=`https://corzacademy.runasp.net/api/Users/get all users and teacher`
+  this.http.post(url,request).subscribe((response:any)=>{
     this.usersData=response.users
     this.originalUsersData=response.users
   this.teachersData=response.teacher
