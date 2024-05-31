@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,7 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class ForgotPasswordComponent {
   forgotPassword: any;
-  constructor(private from: FormBuilder) {
+  constructor(private from: FormBuilder,private http:HttpClient) {
     this.forgotPassword = this.from.group({
       Email: ["", [Validators.email, Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     })
@@ -38,7 +40,17 @@ export class ForgotPasswordComponent {
     }
 
     if (this.forgotPassword.valid && isValid) {
-      console.log("done")
+      const request={
+        "Email":this.forgotPassword.get('Email').value
+      }
+      const url = `https://corzacademy.runasp.net/api/Users/request-password-change`;
+      this.http.post(url,request).subscribe((response:any) => {
+        Swal.fire({
+          title: "Success",
+          text: response.message,
+          icon: "success"
+        });  
+      })
     }
   }
 }
