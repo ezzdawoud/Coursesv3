@@ -70,31 +70,32 @@ fileValidator(control: any) {
   }
   return null;
 }
-
+selectedFile: File | null = null;
 onFileSelected(event: any) {
   const file = event.target.files[0];
-    const reader: FileReader = new FileReader();
+  const reader: FileReader = new FileReader();
 
-    if (file) {
-      const maxSize = 3 * 1024 * 1024;
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-      if (!allowedTypes.includes(file.type)) {
-        alert('Only image files (JPEG, PNG, GIF) are allowed.');
-        event.target.value = ''; 
-        return;
-      }
-      if (file.size > maxSize) {
-        alert('File size exceeds 3 MB limit.');
-        event.target.value = ''; 
-        return;
-      }
-      this.selectedFile = file;
+  if (file) {
+    const maxSize = 3 * 1024 * 1024;
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Only image files (JPEG, PNG, GIF) are allowed.');
+      return;
+    }
+    if (file.size > maxSize) {
+      alert('File size exceeds 3 MB limit.');
+      return;
+    }
+    this.selectedFile = file;
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.imageUrl = e.target.result;
     };
     reader.readAsDataURL(file);
-    }
+  } else {
+    // Clear the selected file
+    this.selectedFile = null;
+  }
 }
 isEditingVar=true;
 isEditing(){
@@ -113,11 +114,14 @@ else{
 
 }
 }
+isChange=false;
+ischaging(){
+  this.isChange=true;
+}
 validLableName=""
 validLablePhoneNumber=""
 validPhone=false;
 validName=false;
-selectedFile: File | null = null;
 updateUserData(){
   if((/\s/.test(this.updateDataForm.get("userName").value))){
     this.validLableName="must be without spacing"
@@ -172,53 +176,67 @@ if(this.updateDataForm.get("phone").hasError("required")){
       "name":name,
       "phoneNumber":number
     }
-    const url = `https://corzacademy.runasp.net/api/Users/updateUserData`;
-    this.http.post(url, request).subscribe((response: any) => {
-      if (this.selectedFile) {
-        console.log(this.selectedFile)
-        const uploadUrl = `https://corzacademy.runasp.net/api/Users/uploadUserPictures`;
-        const formData = new FormData();
-        formData.append('file', this.selectedFile);
-        formData.append('Datauser', new Blob([JSON.stringify(request)], { type: 'application/json' }));
-        this.http.post(uploadUrl, formData).subscribe((uploadResponse: any) => {
-          Swal.fire({
-            title: "Success",
-            text: response.message,
-            icon: "success"
-          });
-          this.updateDataForm.get('userName').disable();
-          this.updateDataForm.get('phone').disable();
-          this.isEditingVar = true;
-          this.isLoading = false;
-        }, (error) => {
-          console.log(error)
-          Swal.fire({
-            title: "Error",
-            text: error.error.message,
-            icon: "error"
-          });
-          this.isLoading = false;
-        });
-      } else {
-        Swal.fire({
-          title: "Success",
-          text: response.message,
-          icon: "success"
-        });
-        this.updateDataForm.get('userName').disable();
-        this.updateDataForm.get('phone').disable();
-        this.isEditingVar = true;
-        this.isLoading = false;
-      }
-    }, (error) => {
+   if(this.selectedFile){ 
+    const Datauser={
+      "id":userid,
+      "token":token
+    }
+    const formData = new FormData();
+            formData.append('file', this.selectedFile);
+            formData.append('id', userid);
+            formData.append('token', token);
+
+    const url = `https://corzacademy.runasp.net/api/Users/upload user pictures`;
+    this.http.post(url, formData).subscribe((response:any) => {
+      this.isLoading=false;
+      this.isEditingVar=true
+      Swal.fire({
+        title: "Success",
+        text: response.message,
+        icon: "success"
+      });  
+        },
+  (error)=>{
+    this.isEditingVar=true
+    this.isLoading=false;
+    Swal.fire({
+      title: "Error",
+      text: error.error.message,
+      icon: "error"
+    });     }
+  );
+  }
+  
+
+  if(this.isChange){
+    this.isLoading=true;
+    const url = `https://corzacademy.runasp.net/api/Users/update user data`;
+    this.http.post(url, request).subscribe((response:any) => {
+      Swal.fire({
+        title: "Success",
+        text: response.message,
+        icon: "success"
+      });  
+      this.updateDataForm.get('userName').disable();
+      this.updateDataForm.get('phone').disable();
+       this.isEditingVar=true;
+       this.isLoading=false;
+    },(error)=>{
       Swal.fire({
         title: "Error",
         text: error.error.message,
         icon: "error"
-      });
-      this.isLoading = false;
-    });
+      });   
+      this.isLoading=false;
+  
+    }
+  
+  )
+    
   }
 }
 }
 }
+}
+
+

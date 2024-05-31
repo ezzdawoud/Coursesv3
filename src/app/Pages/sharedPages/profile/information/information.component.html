@@ -50,13 +50,13 @@
 
     <div class="coolinput">
         <label for="input" class="text">Name:</label>
-        <input type="text" placeholder="Write here..." class="input" formControlName="userName" >
+        <input type="text" placeholder="Write here..." class="input" formControlName="userName" (change)="ischaging()">
         <label >{{validLableName}}</label>
     </div>
 
     <div class="coolinput">
         <label for="input" class="text">Phone Number:</label>
-        <input type="text" placeholder="Write here..." class="input" formControlName="phone" >
+        <input type="text" placeholder="Write here..." class="input" formControlName="phone" (change)="ischaging()">
     </div>
 
     <div class="coolinput">
