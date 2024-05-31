@@ -88,6 +88,7 @@ onFileSelected(event: any) {
         event.target.value = ''; 
         return;
       }
+      this.selectedFile = file;
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.imageUrl = e.target.result;
@@ -116,6 +117,7 @@ validLableName=""
 validLablePhoneNumber=""
 validPhone=false;
 validName=false;
+selectedFile: File | null = null;
 updateUserData(){
   if((/\s/.test(this.updateDataForm.get("userName").value))){
     this.validLableName="must be without spacing"
@@ -170,32 +172,52 @@ if(this.updateDataForm.get("phone").hasError("required")){
       "name":name,
       "phoneNumber":number
     }
-    const url = `https://corzacademy.runasp.net/api/Users/update user data`;
-    this.http.post(url, request).subscribe((response:any) => {
-      Swal.fire({
-        title: "Success",
-        text: response.message,
-        icon: "success"
-      });  
-      this.updateDataForm.get('userName').disable();
-      this.updateDataForm.get('phone').disable();
-       this.isEditingVar=true;
-       this.isLoading=false;
-    },(error)=>{
+    const url = `https://corzacademy.runasp.net/api/Users/updateUserData`;
+    this.http.post(url, request).subscribe((response: any) => {
+      if (this.selectedFile) {
+        const uploadUrl = `https://corzacademy.runasp.net/api/Users/uploadUserPictures`;
+        const formData = new FormData();
+        formData.append('file', this.selectedFile);
+        formData.append('Datauser', new Blob([JSON.stringify(request)], { type: 'application/json' }));
+
+        this.http.post(uploadUrl, formData).subscribe((uploadResponse: any) => {
+          Swal.fire({
+            title: "Success",
+            text: response.message,
+            icon: "success"
+          });
+          this.updateDataForm.get('userName').disable();
+          this.updateDataForm.get('phone').disable();
+          this.isEditingVar = true;
+          this.isLoading = false;
+        }, (error) => {
+          Swal.fire({
+            title: "Error",
+            text: error.error.message,
+            icon: "error"
+          });
+          this.isLoading = false;
+        });
+      } else {
+        Swal.fire({
+          title: "Success",
+          text: response.message,
+          icon: "success"
+        });
+        this.updateDataForm.get('userName').disable();
+        this.updateDataForm.get('phone').disable();
+        this.isEditingVar = true;
+        this.isLoading = false;
+      }
+    }, (error) => {
       Swal.fire({
         title: "Error",
         text: error.error.message,
         icon: "error"
-      });   
-      this.isLoading=false;
-  
-    }
-  
-  )
-    
+      });
+      this.isLoading = false;
+    });
   }
 }
-
-}}
-
-
+}
+}

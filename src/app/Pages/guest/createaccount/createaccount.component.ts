@@ -122,7 +122,7 @@ else{
         "email": this.creatAccount.get('userEmail').value,
         "passwordHash": this.creatAccount.get('password').value,
         "phoneNumber": this.creatAccount.get('PhoneNumber').value,
-        "usersPictrues": null
+        "usersPictrues": "https://res.cloudinary.com/dolmafyz2/image/upload/v1713036363/shakpm74duvy4snp5pll.png"
       }
 
       const url = `https://corzacademy.runasp.net/api/Users/register`;
