@@ -191,6 +191,7 @@ if(this.updateDataForm.get("phone").hasError("required")){
           this.isEditingVar = true;
           this.isLoading = false;
         }, (error) => {
+          console.log(error)
           Swal.fire({
             title: "Error",
             text: error.error.message,
