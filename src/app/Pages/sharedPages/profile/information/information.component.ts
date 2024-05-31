@@ -175,11 +175,11 @@ if(this.updateDataForm.get("phone").hasError("required")){
     const url = `https://corzacademy.runasp.net/api/Users/updateUserData`;
     this.http.post(url, request).subscribe((response: any) => {
       if (this.selectedFile) {
+        console.log(this.selectedFile)
         const uploadUrl = `https://corzacademy.runasp.net/api/Users/uploadUserPictures`;
         const formData = new FormData();
         formData.append('file', this.selectedFile);
         formData.append('Datauser', new Blob([JSON.stringify(request)], { type: 'application/json' }));
-
         this.http.post(uploadUrl, formData).subscribe((uploadResponse: any) => {
           Swal.fire({
             title: "Success",
