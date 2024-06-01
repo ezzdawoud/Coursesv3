@@ -50,7 +50,14 @@ export class ForgotPasswordComponent {
           text: response.message,
           icon: "success"
         });  
-      })
+      },(error)=>{
+        Swal.fire({
+          title: "Error",
+          text: error.message,
+          icon: "error"
+        });  
+      }
+    )
     }
   }
 }

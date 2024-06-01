@@ -109,11 +109,17 @@ this.services.singInMethod(email,password).subscribe(
     
     this.authService.login(role);
     this.loder.hideLoader()
+    
 if(role=="admin"){
   this.Router.navigate(["/admin"])
 }
 else if(role=="teacher"){
   this.Router.navigate(["/teacher"])
+
+}
+else{
+  
+  this.Router.navigate(['/']);
 
 }
     },
