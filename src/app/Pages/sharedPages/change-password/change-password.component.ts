@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-change-password',
@@ -13,7 +14,7 @@ export class ChangePasswordComponent {
   tokenVerified: boolean = false;
   email=""
    token=""
-  constructor(private from: FormBuilder,private http:HttpClient,private parms:ActivatedRoute) {
+  constructor(private from: FormBuilder,private http:HttpClient,private parms:ActivatedRoute,private router:Router) {
     this.parms.paramMap.subscribe(params => {
       this.token = params.get('token')!;
       this.email = params.get('email')!;
@@ -120,8 +121,19 @@ else{
         "token": this.token,
         "newPassword": password
       }
-       this.http.post(url, reset).subscribe((response)=>{
-console.log("done")
+       this.http.post(url, reset).subscribe((response:any)=>{
+        Swal.fire({
+          title: "Success",
+          text: response.message,
+          icon: "success"
+        }).then(()=>{
+this.router.navigate(["/"])
+      })},(error)=>{
+        Swal.fire({
+          title: "Error",
+          text: error.message,
+          icon: "error"
+        })
       })
   
     }

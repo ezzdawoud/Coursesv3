@@ -121,8 +121,13 @@ changeEmail(token: string, newEmail: string) {
 }
 
 confirmNewEmail(userId: string, token: string, newEmail: string) {
-  const url = `https://corzacademy.runasp.net/api/Users/confirm-new-email/${userId}/${token}/${newEmail}`;
-  return this.http.post(url, {});
+  const request={
+    "userId":userId,
+    "NewEmail":newEmail,
+    "Token":token
+  }
+  const url = `https://corzacademy.runasp.net/api/Users/confirm-new-email`;
+  return this.http.post(url, request);
 }
   private handleError(error: HttpErrorResponse): Observable<never> {
     localStorage.removeItem("user")
