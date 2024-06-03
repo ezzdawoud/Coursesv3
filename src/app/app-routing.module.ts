@@ -24,8 +24,9 @@ const routes: Routes = [
   {path:"profile",loadChildren:()=>import('./Pages/sharedPages/profile/profile.module').then(m=>m.ProfileModule),canActivate: [AuthGuard]},
   {path: "confirm-email/:id/:token", loadChildren: () => import('./Pages/guest/confierm-email/confierm-email.module').then(m => m.ConfiermEmailModule)}
   ,{path: "confirm-new-email/:id/:token/:newEmail", loadChildren: () => import('./Pages/guest/confirm-email-change/confirm-email-change.module').then(m => m.ConfirmEmailChangeModule)}
-  ,{path: "teacherProfile/:teacherId", loadChildren: () => import('./Pages/sharedPages/teacher-profile/teacher-profile.module').then(m => m.TeacherProfileModule)}
+  ,{path: "teacherProfile/:teacherName", loadChildren: () => import('./Pages/sharedPages/teacher-profile/teacher-profile.module').then(m => m.TeacherProfileModule)}
   ,{path: "roadMap", loadChildren: () => import('./Pages/sharedPages/road-map/road-map.module').then(m => m.RoadMapModule)}
+  ,{path: "contact", loadChildren: () => import('./Pages/sharedPages/contact/contact.module').then(m => m.ContactModule)}
 
 ]},
 
@@ -41,7 +42,7 @@ const routes: Routes = [
   children:[{
     path:"",loadChildren:()=>import('./Pages/teacher/teacher-dashboard/teacher-dashboard.module').then(m=>m.TeacherDashboardModule)
   },
-  { path: 'profile', loadChildren: () => import('./Pages/sharedPages/profile/profile.module').then(m => m.ProfileModule) }
+  { path: 'profile', loadChildren: () => import('./Pages/teacher/teacher-profile/teacher-profile.module').then(m => m.TeacherProfileModule) }
   ,{path:"add Course",loadChildren:()=>import('./Pages/teacher/add-course/add-course.module').then(m=>m.AddCourseModule)},
   {path:"update Course/:courseId",loadChildren:()=>import('./Pages/teacher/update-course/update-course.module').then(m=>m.UpdateCourseModule)},
   {path:"add lessons/:courseId",loadChildren:()=>import('./Pages/teacher/add-lessons/add-lessons.module').then(m=>m.AddLessonsModule)},

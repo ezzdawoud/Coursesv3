@@ -35,8 +35,8 @@ console.log(error)
 );
 })
     this.changePasswordFrom = this.from.group({
-      passwrod: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(16)]],
-      confirmPasswrod: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(16)]],
+      passwrod: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      confirmPasswrod: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
     })
   }
   show = true;
@@ -50,13 +50,13 @@ console.log(error)
       this.inputType = "text";
     }
   }
-  lower = "contian at least on lower "
+  lower = "contian at least one lower "
   lowerValid = false;
-  capital = "contian at least on capital "
+  capital = "contian at least one capital "
   capitalValid = false;
-  char = "contian at least on spicaial character"
+  char = "contian at least one special character"
   charValid = false;
-  number = "contian at least on spicaial number"
+  number = "contian at least one number"
   numberValid = false;
   validPassword = false;
 
