@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:"profile",loadChildren:()=>import('./Pages/sharedPages/profile/profile.module').then(m=>m.ProfileModule),canActivate: [AuthGuard]},
   {path: "confirm-email/:id/:token", loadChildren: () => import('./Pages/guest/confierm-email/confierm-email.module').then(m => m.ConfiermEmailModule)}
   ,{path: "confirm-new-email/:id/:token/:newEmail", loadChildren: () => import('./Pages/guest/confirm-email-change/confirm-email-change.module').then(m => m.ConfirmEmailChangeModule)}
-  ,{path: "teacherProfile", loadChildren: () => import('./Pages/sharedPages/teacher-profile/teacher-profile.module').then(m => m.TeacherProfileModule)}
+  ,{path: "teacherProfile/:teacherId", loadChildren: () => import('./Pages/sharedPages/teacher-profile/teacher-profile.module').then(m => m.TeacherProfileModule)}
 
 ]},
 
@@ -43,7 +43,8 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('./Pages/sharedPages/profile/profile.module').then(m => m.ProfileModule) }
   ,{path:"add Course",loadChildren:()=>import('./Pages/teacher/add-course/add-course.module').then(m=>m.AddCourseModule)},
   {path:"update Course/:courseId",loadChildren:()=>import('./Pages/teacher/update-course/update-course.module').then(m=>m.UpdateCourseModule)},
-  {path:"add lessons/:courseId",loadChildren:()=>import('./Pages/teacher/add-lessons/add-lessons.module').then(m=>m.AddLessonsModule)}
+  {path:"add lessons/:courseId",loadChildren:()=>import('./Pages/teacher/add-lessons/add-lessons.module').then(m=>m.AddLessonsModule)},
+  {path:"lessons/:courseId/:lessonsId",loadChildren:()=>import('./Pages/teacher/teacher-lessons-page/teacher-lessons-page.module').then(m=>m.TeacherLessonsPageModule)},
 
 ]},
   {path:"user",component:UserPagesComponent,

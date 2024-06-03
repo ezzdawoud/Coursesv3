@@ -25,7 +25,7 @@ export class TeacherDashboardComponent {
 
       })
       this.service.getTeacherCourses(id, token).subscribe(
-        (response) => {this.teacherCourses = response;this.isloading=true},
+        (response) => {this.teacherCourses = response;this.isloading=true;console.log(this.teacherCourses)},
         (error) => {
          console.log("errors")
       })

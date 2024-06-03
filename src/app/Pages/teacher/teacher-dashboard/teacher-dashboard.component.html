@@ -44,14 +44,13 @@
         </div>
         <div style="display:flex ; justify-content:center;align-items: center;padding-top:10px ;">
         
-            <button class="Btn">
+            <button class="Btn"routerLink="lessons/{{iteams.courseId}}/1">
 
-                <div class="sign"><i class="bi bi-arrow-right" style="color: white; font-size: 20px;"></i>
-                </div>
+                join
+            </button>
+            <button style="margin-left: 10px;" class="Btn" routerLink="update Course/{{iteams.courseId}}">
 
-                <div class="text" routerLink="update Course/{{iteams.courseId}}">Edit</div>
-                <div class="text" routerLink="update Course/{{iteams.courseId}}">Join</div>
-
+                edit
             </button>
         </div>
     </div>

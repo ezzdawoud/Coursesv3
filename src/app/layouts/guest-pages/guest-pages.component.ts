@@ -31,6 +31,13 @@ export class GuestPagesComponent implements OnInit {
       const id = JSON.parse(usersData).id;
       const token = JSON.parse(usersData).usertoken;
       this.loader.showLoader();
+      this.http.getUserRole(id,token).subscribe((response)=>{
+        if(response[0]=="admin"){
+          this.router.navigate(["/admin"])
+        }
+        else if(response[0]=="teacher")
+          this.router.navigate(["/teacher"])
+      })
       this.http.getUserInformation(id, token).subscribe(
         (response) => {
           this.userData = response;
