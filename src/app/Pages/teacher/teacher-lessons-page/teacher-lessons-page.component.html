@@ -118,9 +118,9 @@
                       <div class="yourcomment">
                           <!-- <img src="image.png" alt="" class="commentPhoto"> -->
                           <div class="input-wrapper">
-                              <input class="input-box" type="text" placeholder="write here" #comment>
+                              <input class="input-box" style="font-size:16px;border:0;border-bottom:2px solid #ccc;color:#000;width:100%;background-color:transparent;transition:border-color .3s ease-in-out" type="text" placeholder="write here" #comment>
                               <label style="color: red;" *ngIf="commentsChecker">{{commentsCheckerLabel}}</label>
-                              <span class="underline"></span>
+                              <span class="underline" style="position:absolute;bottom:0;left:0;width:100%;height:2px;background-color:#663cfa;transform:scaleX(0);transition:transform .3s ease-in-out"></span>
                             </div>
                             <button style="width: 16%;height: 30px; border: none;background-color: #663cfa;color: white;font-size: 18px;font-weight: bolder;" (click)="addComments(comment)">Comment</button>
                       </div>
@@ -192,14 +192,14 @@
                             </div>
                         
                             <!-- Add input for replying to the main comment -->
-                            <div class="yourreplay">
+                            <div class="yourreplay" style="flex-direction:column;width:70%;margin:15px 15px 15px 80px">
                               <div style="display: flex;">
                                 <div class="input-wrapper">
                                <div style="width: 100%;display: flex;">  
-                                 <input class="input-box" type="text" placeholder="replay here" #subComment>
+                                 <input class="input-box" style="font-size:16px;border:0;border-bottom:2px solid #ccc;color:#000;width:100%;background-color:transparent;transition:border-color .3s ease-in-out" type="text" placeholder="replay here" #subComment>
                                   <button (click)="addSubComment(subComment,comment.comment.commentsId,i)" style="width: 16%;height: 27px; border: none;background-color: #663cfa;color: white;font-size: 18px;font-weight: bolder;">Reply</button></div>
                                   <label *ngIf="subCommentsChecker">{{subCommentsCheckerLabel}}</label>
-                                  <span class="underline"></span>
+                                  <span class="underline" style="position:absolute;bottom:0;left:0;width:100%;height:2px;background-color:#663cfa;transform:scaleX(0);transition:transform .3s ease-in-out"></span>
                                 </div>
                               </div>
                             </div>
