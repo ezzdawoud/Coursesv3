@@ -25,6 +25,7 @@ const routes: Routes = [
   {path: "confirm-email/:id/:token", loadChildren: () => import('./Pages/guest/confierm-email/confierm-email.module').then(m => m.ConfiermEmailModule)}
   ,{path: "confirm-new-email/:id/:token/:newEmail", loadChildren: () => import('./Pages/guest/confirm-email-change/confirm-email-change.module').then(m => m.ConfirmEmailChangeModule)}
   ,{path: "teacherProfile/:teacherId", loadChildren: () => import('./Pages/sharedPages/teacher-profile/teacher-profile.module').then(m => m.TeacherProfileModule)}
+  ,{path: "roadMap", loadChildren: () => import('./Pages/sharedPages/road-map/road-map.module').then(m => m.RoadMapModule)}
 
 ]},
 
