@@ -95,7 +95,7 @@
             <h1 style="margin-bottom: 25px;">{{lessonsDate.lesson.lessonsName}}</h1>
             <div style="display: flex;">
                 <img src="{{lessonsDate.teacherInfoApi.picture}}" style="width:30px;height:30px;clip-path:circle()" alt="">
-                <a href="" style="margin-top: 5px; margin-left: 5px; text-decoration:none">{{lessonsDate.teacherInfoApi.userName}}</a>
+                <a href="" style="margin-top: 5px; margin-left: 5px; text-decoration:none" routerLink="/teacherProfile/{{lessonsDate.teacherInfoApi.userName}}">{{lessonsDate.teacherInfoApi.userName}}</a>
             </div>
         </div>
         <div class="videoo">

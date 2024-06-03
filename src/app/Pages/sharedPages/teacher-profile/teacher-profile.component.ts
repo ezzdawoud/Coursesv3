@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -12,7 +12,7 @@ export class TeacherProfileComponent {
   usersDatalocal: any = localStorage.getItem("user");
 teacherData:any={teacherData:""}
 thereisnoteahcer=true;
-constructor(private http:HttpClient,private parms:ActivatedRoute){
+constructor(private http:HttpClient,private parms:ActivatedRoute,private router :Router){
   this.parms.params.subscribe((parms: any) => {
 
   if (this.usersDatalocal && this.usersDatalocal.length > 0) {
@@ -25,17 +25,19 @@ constructor(private http:HttpClient,private parms:ActivatedRoute){
   }
   const url = `https://corzacademy.runasp.net/api/teacher/get teacher profile`;
   this.http.post(url, request).subscribe((response) => {
-    console.log(response  )
+    console.log(response)
     this.teacherData=response
     this.thereisnoteahcer=false
 
   },(error)=>{
-    console.log(error)
+    if (error.status === 404) {
+      this.router.navigate(["/signin"])
+    } 
     this.thereisnoteahcer=true
   })
  
 }else{
-
+this.router.navigate(["/signin"])
 }
 })
 
