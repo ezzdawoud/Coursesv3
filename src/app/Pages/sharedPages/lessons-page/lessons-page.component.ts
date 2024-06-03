@@ -27,6 +27,7 @@ userid="";
     console.log("heelloo")
     this.isLoading = true;
     this.parms.params.subscribe((parms: any) => {
+      this.isLoading=true
       this.idOfCourse = parms.courseId;
       this.idOfLessons = parms.lessonsId;
     
@@ -49,16 +50,21 @@ userid="";
           const url = `https://corzacademy.runasp.net/api/lessons/get lessons comment`;
           this.http.post(url, requset).subscribe((response) => {
             this.comments=response;
+            this.isLoading=false
             console.log(this.comments)
           },(error)=>{})
+          this.isLoading=false
+
           this.thereIsNoLessons=false;
 
         }, (error) => {
           if(this.idOfLessons==1){
+
             this.thereIsNoLessons=true;
           }
           else{
             this.thereIsNoLessons=false;
+
             this.router.navigate(["/Lessons",this.idOfCourse,1])
           }
           this.isLoading = false

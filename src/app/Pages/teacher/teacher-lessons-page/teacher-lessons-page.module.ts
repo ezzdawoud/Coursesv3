@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { TeacherLessonsPageRoutingModule } from './teacher-lessons-page-routing.module';
 import { TeacherLessonsPageComponent } from './teacher-lessons-page.component';
-import { MyPipePipe } from 'src/app/my-pipe.pipe';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
     TeacherLessonsPageComponent,
-    MyPipePipe
   ],
   imports: [
     CommonModule,
-    TeacherLessonsPageRoutingModule
+    TeacherLessonsPageRoutingModule,
+    SharedModule
   ]
 })
 export class TeacherLessonsPageModule { }
