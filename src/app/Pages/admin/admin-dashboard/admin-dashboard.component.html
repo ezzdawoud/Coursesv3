@@ -106,8 +106,9 @@
               <td>{{ item.phoneNumber }}</td>
               <td *ngIf="!item.emailConfirmed" style="text-align: center;"><i class="bi bi-x-circle" style="font-size: 20px;color: red;"></i></td>
               <td *ngIf="item.emailConfirmed" style="text-align: center;"><i class="bi bi-check2-circle" style="font-size: 25px;color: green;"></i></td>
-<td style="text-align: center;"><i class="bi bi-x-circle-fill" style="font-size: 20px;color: red;"></i></td>
-            </tr>
+<td style="text-align: center;"><i class="bi bi-x-circle-fill" style="font-size: 20px;color: red;" (click)="deletedUser(item.id)"></i></td>
+            
+</tr>
           </tbody>
         <tfoot>
           <tr>

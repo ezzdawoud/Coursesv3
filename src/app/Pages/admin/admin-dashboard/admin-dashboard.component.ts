@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { PaginationServiceService } from 'src/app/pagination-service.service';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -102,6 +103,7 @@ get totalTeachersPages(): number {
 }
 
 get currentPageUsersData(): any[] {
+  
   const startIndex = (this.currentPageUsers - 1) * this.pageSize;
   const endIndex = Math.min(startIndex + this.pageSize, this.usersData.length);
   return this.usersData.slice(startIndex, endIndex);
@@ -159,5 +161,41 @@ searchUsers(value: string): void {
 
 searchTeachers(value: string): void {
   this.teachersData = this.originalTeachersData.filter((teacher: any) => teacher.userName.includes(value));
+}
+
+
+deletedUser(userId:string){
+  Swal.fire({
+    title: 'Do you want to delete this comment?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    denyButtonText: 'No',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+        var userid = JSON.parse(this.usersDatalocal!).id;
+        var token = JSON.parse(this.usersDatalocal!).usertoken;
+        const request={
+          "id":userid,
+          "token":token,
+          "userId":userId
+        }
+        const url=`https://corzacademy.runasp.net/api/Users/delete user`
+        this.http.post(url,request).subscribe((response:any)=>{
+          Swal.fire({
+            title: "Success",
+            text: "deleted done",
+            icon: "success"
+          })
+          this.usersData = this.usersData.filter(user => user.id !== userId);
+        },(error)=>{
+          console.log(error)
+        })  
+      
+      }
+
+    }})
+ 
 }
 }

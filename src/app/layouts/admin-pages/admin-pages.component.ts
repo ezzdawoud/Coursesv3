@@ -59,4 +59,15 @@ export class AdminPagesComponent {
   logout() {
     this.authService.logout();
   }
+  sidebarActive = false;
+
+  toggleSidebar() {
+    this.sidebarActive = !this.sidebarActive;
+  }
+  toggleCollapse(collapseId: string) {
+    const collapseElement = document.getElementById(collapseId);
+    if (collapseElement) {
+      collapseElement.classList.toggle('show');
+    }
+  }
 }

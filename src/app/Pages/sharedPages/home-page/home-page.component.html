@@ -1,6 +1,6 @@
 <section id="hero" class="d-flex flex-column justify-content-center" >
   <div class="container" data-aos="zoom-in" data-aos-delay="100">
-    <h1 style="margin-right:100px !important; ">Corz Academy</h1>
+    <h1 style="margin-right:170px !important; ">Corz Academy</h1>
     <p style="margin-right:100px !important; "><span class="typed"></span></p>
   </div>
 </section><!-- End Hero -->
@@ -9,27 +9,27 @@
 <hr style="width: 76%;margin: 20px auto;">
 <div class="features">
 <div>
-    <img src="../../../../assets/feauters.jpg" alt="">
+    <img src="../../../../assets/roadmap.png" alt="" style="border-radius: 15px;">
     <span class="featuresName" >
     </span>
     
     <hr width="76%" />
     <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, velit dol        </p>   </div>
+      Introducing a Roadmap to make it easier for you to reach your goal      </p>   </div>
 
 <div>
-    <img src="../../../../assets/Asset2.png" alt="">
+    <img src="../../../../assets/online course.png" alt="" style="border-radius: 15px;">
 
     <hr width="76%" />
     <p>
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, velit dol        </p>
+      Online classes that make it easier for you to understand the information        </p>
 </div>  
 <div >
-    <img src="../../../../assets/Asset2.png" alt="">
+    <img src="../../../../assets/support.png" alt="" style="border-radius: 15px;">
 
     <hr width="76%" />
     <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, velit dol        </p>
+      Smooth and fast customer service        </p>
 </div>
 </div>
 <h1 style="text-align: center;font-weight: bolder;font-size: 35px;">Most Common</h1>
@@ -38,7 +38,9 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, velit dol    
 <div *ngFor="let card of cards.slice(startIndex, startIndex + visibleCards)" class="carousel-cell">
   <!-- ======================================= -->
   <div class="cardd">
-      <div class="mainimage"><img src="{{card.picture}}"></div>
+      <div class="mainimage"><img src="{{card.picture}}" style="  width: 100%;
+        border-radius: 12px 12px 0 0;
+        height: 180px"></div>
       <div style="margin-top: 10px;display: flex;justify-content: space-between;align-items: center;">
         <div style="margin-bottom: 5px;">  <h1 style="margin-bottom: -5px;">{{card.courseName}}</h1>
           <i class="bi bi-star-fill stars" *ngFor="let _ of [].constructor(card.rating||0)"></i>
@@ -47,7 +49,10 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, velit dol    
           <h4>{{card.couresValue}}$</h4>
 
       </div>
-      <div class="discreb">
+      <div class="discreb" style="  width: 100%;
+      height: 50px;
+      overflow: hidden !important;
+      font-size: 10px">
           <p>i{{card.couresDescription}}</p>
 
       </div>
@@ -55,7 +60,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, velit dol    
           <div style="display: flex;"><img src="{{card.teacherPicture}}" alt="">
               <h4 style="margin-left: 5px; margin-top: 5px;">{{card.teacherName}}</h4>
           </div>
-          <label style="margin-top: 5px; font-size: medium; font-weight: bold;">students: {{card.numberOfStudents}}</label>
+          <label style="margin-top: 5px; font-size: medium; font-weight: bold;" >students: {{card.numberOfStudents}}</label>
       </div>
       <div style="display:flex ; justify-content:center;align-items: center;padding-top:10px ;">
       
@@ -108,9 +113,6 @@ font-weight: bolder;
 
 
 
-<!-- </section>End Contact Section
-
-</main>End #main  -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
