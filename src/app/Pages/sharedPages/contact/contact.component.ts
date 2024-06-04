@@ -91,7 +91,10 @@ this.http.post(url,request).subscribe((response:any) => {
     text: "We will send you an email.",
     icon: "success"
   })
+  this.contactDataFrom.reset()
 },(error)=>{
+  console.log(error)
+  
   Swal.fire({
     title: "Error",
     text: "We will be back",
