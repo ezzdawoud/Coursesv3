@@ -47,7 +47,7 @@ this.router.navigate(["/signin"])
   this.updateDataForm=this.form.group({
     userName:[{value: '', disabled: true},[Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
     Email:[{value: '', disabled: true},[Validators.email,Validators.required,Validators.minLength(4),Validators.maxLength(50)]],
-    phone:[{value: '', disabled: true},[Validators.required,Validators.maxLength(16),Validators.minLength(10)]],
+    phone:[{value: '', disabled: true},[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
     file:['',this.fileValidator]
   })
 }
