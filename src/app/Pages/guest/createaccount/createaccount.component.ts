@@ -18,7 +18,9 @@ export class CreateaccountComponent {
       Name: ["", [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
       userEmail: ["", [Validators.email, Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
       password: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
-      PhoneNumber: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(16)]]
+      PhoneNumber: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(16)]],
+      AboutMe: [""]
+
     })
   }
   
@@ -61,6 +63,17 @@ else{
   validLableName=""
   validLablePhoneNumber=""
   validName=false;
+  ValidLableAboutMe=""
+  teahcer=false;
+  isValidTeacher=false
+  Role(value:any){
+if(value=="Teacher"){
+  this.teahcer=true
+} 
+else{
+  this.teahcer=false
+}
+}
   createAccount(){
    let isValid=false;
    if(this.creatAccount.get("Name").hasError("required")){
@@ -115,8 +128,28 @@ else{
     else{
       this.validLablePhoneNumber=""
     }
+    if(this.creatAccount.get('AboutMe').value.trim().length === 0){
+      this.ValidLableAboutMe="This field is required"
+      this.isValidTeacher=false
+    }
+    else if(this.creatAccount.get('AboutMe').value.length<50 ){
+      this.ValidLableAboutMe="length must be between 50-200"
+      this.isValidTeacher=false
+
+    }
+    else if(this.creatAccount.get('AboutMe').value.length>200){
+      this.ValidLableAboutMe="length must be between 50-200"
+      this.isValidTeacher=false
+
+    }
+    else{
+      this.ValidLableAboutMe=""
+      this.isValidTeacher=true
+
+    }
     if(this.creatAccount.valid && this.validPassword&&this.validName){
       this.isLoading=true;
+      if(!this.teahcer){
       let newUser={
         "userName":this.creatAccount.get("Name").value ,
         "email": this.creatAccount.get('userEmail').value,
@@ -147,6 +180,36 @@ this.router.navigate(["/signin"])
       )
       
       
+    }}
+else if(this.teahcer && this.isValidTeacher){
+  let newUser={
+    "userName":this.creatAccount.get("Name").value ,
+    "email": this.creatAccount.get('userEmail').value,
+    "passwordHash": this.creatAccount.get('password').value,
+    "phoneNumber": this.creatAccount.get('PhoneNumber').value,
+    "usersPictrues": "https://res.cloudinary.com/dolmafyz2/image/upload/v1713036363/shakpm74duvy4snp5pll.png",
+    "AboutMe":this.creatAccount.get('AboutMe').value
+  }
+  const url = `https://corzacademy.runasp.net/api/Users/registerTeacher`;
+  this.http.post(url,newUser).subscribe((response:any) => {
+    Swal.fire({
+      title: "Success",
+      text: response.message,
+      icon: "success"
+    }).then(()=>{
+      this.isLoading=false;
+
+this.router.navigate(["/signin"])
+    });},(error)=>{
+      this.isLoading=false;
+      Swal.fire({
+        title: "Error",
+        text: error.error.message,
+        icon: "error"
+      })
     }
+  
+  )
+}
   }
 }

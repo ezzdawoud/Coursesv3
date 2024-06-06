@@ -32,7 +32,7 @@ const routes: Routes = [
 
 {path:"admin",component:AdminPagesComponent,children:[
   {path:"",loadChildren:()=>import('./Pages/admin/admin-dashboard/admin-dashboard.module').then(m=>m.AdminDashboardModule)},
-  {path:"profile",loadChildren:()=>import('./Pages/sharedPages/profile/profile.module').then(m=>m.ProfileModule)},
+  {path:"profile",loadChildren:()=>import('./Pages/admin/admin-profile/admin-profile.module').then(m=>m.AdminProfileModule)},
   {path:"badCourses",loadChildren:()=>import('./Pages/admin/bad-courses/bad-courses.module').then(m=>m.BadCoursesModule)},
   {path:"lessonsPage/:courseId/:lessonsId",loadChildren:()=>import('./Pages/admin/admin-lessons-page/admin-lessons-page.module').then(m=>m.AdminLessonsPageModule)},
 

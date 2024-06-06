@@ -7,11 +7,11 @@ import { ServicesService } from 'src/app/services/services.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-information',
-  templateUrl: './information.component.html',
-  styleUrls: ['./information.component.css']
+  selector: 'app-admin-information',
+  templateUrl: './admin-information.component.html',
+  styleUrls: ['./admin-information.component.css']
 })
-export class InformationComponent {
+export class AdminInformationComponent {
   usersDatalocal: any = localStorage.getItem("user");
   userData:any={}
   updateDataForm:any;
@@ -32,8 +32,6 @@ export class InformationComponent {
       userName:this.userData.userName,
       Email:this.userData.userEmail,
       phone:this.userData.phoneNumber|| " ",
-      AboutMe:this.userData.aboutMe|| " ",
-
       
     })
     this.imageUrl=this.userData.usersPictrues;
@@ -50,7 +48,6 @@ export class InformationComponent {
       userName:[{value: '', disabled: true},[Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
       Email:[{value: '', disabled: true},[Validators.email,Validators.required,Validators.minLength(4),Validators.maxLength(50)]],
       phone:[{value: '', disabled: true},[Validators.required,Validators.maxLength(16),Validators.minLength(10)]],
-      AboutMe: [{value:'',disabled: true},[Validators.required,Validators.minLength(50),Validators.maxLength(200)]],
       file:['',this.fileValidator]
     })
   }
@@ -103,21 +100,15 @@ export class InformationComponent {
   isEditingVar=true;
   isEditing(){
     console.log(this.isEditingVar)
-    const aboutMeControl = this.updateDataForm.get('AboutMe');
-
     if(this.isEditingVar){
       console.log("osiadjoisaj")
     this.updateDataForm.get('userName').enable();
     this.updateDataForm.get('phone').enable();
-    aboutMeControl.enable();
-
     this.isEditingVar=false;
   }
   else{
     this.updateDataForm.get('userName').disable();
     this.updateDataForm.get('phone').disable();
-    aboutMeControl.disable();
-
      this.isEditingVar=true;
      console.log(this.isEditingVar)
   
@@ -131,24 +122,22 @@ export class InformationComponent {
   validLablePhoneNumber=""
   validPhone=false;
   validName=false;
-  ValidLableAboutMe=""
-  isValidTeacher=false;
   updateUserData(){
     if((/\s/.test(this.updateDataForm.get("userName").value))){
-      this.validLableName="Must be without spacing"
+      this.validLableName="must be without spacing"
       this.validName=true;
     }
     else if(this.updateDataForm.get("userName").hasError("required")){
-  this.validLableName="This filed is required"
+  this.validLableName="this filed is required"
   this.validName=true;
   }
   else if(this.updateDataForm.get("userName").hasError("minlength")){
-    this.validLableName="length must be between 3-50"
+    this.validLableName="10-16"
     this.validName=true;
   
   }
   else if(this.updateDataForm.get("userName").hasError("maxlength")){
-    this.validLableName="length must be between 3-50"
+    this.validLableName="10-16"
     this.validName=true;
   
   }
@@ -162,12 +151,12 @@ export class InformationComponent {
     this.validPhone=true;
     }
     else if(this.updateDataForm.get("phone").hasError("minlength")){
-      this.validLablePhoneNumber="length must be exactly 10"
+      this.validLablePhoneNumber="10-16"
       this.validPhone=true;
     
     }
     else if(this.updateDataForm.get("phone").hasError("maxlength")){
-      this.validLablePhoneNumber="length must be exactly 10"
+      this.validLablePhoneNumber="10-16"
       this.validPhone=true;
     
     }
@@ -176,40 +165,19 @@ export class InformationComponent {
       this.validPhone=false;
     }
  
-    if(this.updateDataForm.get('AboutMe').value.trim().length === 0){
-      this.ValidLableAboutMe="This field is required"
-      this.isValidTeacher=false
-    }
-    else if(this.updateDataForm.get('AboutMe').value.length<50 ){
-      this.ValidLableAboutMe="length must be between 50-200"
-      this.isValidTeacher=false
 
-    }
-    else if(this.updateDataForm.get('AboutMe').value.length>200){
-      this.ValidLableAboutMe="length must be between 50-200"
-      this.isValidTeacher=false
-
-    }
-    else{
-      this.ValidLableAboutMe=""
-      this.isValidTeacher=true
-
-    }
-    if(!this.validName&&!this.validPhone&&this.isValidTeacher){
+    if(!this.validName&&!this.validPhone){
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
       var name=this.updateDataForm.get('userName').value;
       var number=this.updateDataForm.get('phone').value;
-      var aboutMe=this.updateDataForm.get('AboutMe').value;
-
       this.isLoading=true;
       const request={
         "id":userid,
         "token":token,
         "name":name,
-        "phoneNumber":number,
-        "aboutMe":aboutMe
+        "phoneNumber":number
       }
      if(this.selectedFile){ 
       const Datauser={
@@ -252,7 +220,7 @@ export class InformationComponent {
           text: response.message,
           icon: "success"
         });  
-        this.updateDataForm.disable();
+        this.updateDataForm.get('userName').disable();
         this.updateDataForm.get('phone').disable();
          this.isEditingVar=true;
          this.isLoading=false;
@@ -268,9 +236,6 @@ export class InformationComponent {
     
     )
       
-    }
-    else{
-      this.isLoading=false;
     }
   }
   }

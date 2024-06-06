@@ -88,12 +88,15 @@ updatecouese(course:any){
   const url = `https://corzacademy.runasp.net/api/courses/update course`;
   return this.http.post(url,course);
 }
-uploadcourseImage(id:string,token:string,courseId:number,file:any){
+uploadcourseImage(id:string,token:string,courseId:string,file:any){
   const formData: FormData = new FormData();
-  formData.append('file', file);
+    formData.append('token', token);
+    formData.append('userId', id);
+    formData.append('courseId', courseId);
+    formData.append('file', file, file.name);  formData.append('file', file);
 
-  const url = `https://corzacademy.runasp.net/api/courses/upload course Image/${courseId}/${id}/${token}`;
-  return this.http.post(url,file);
+  const url = `https://corzacademy.runasp.net/api/courses/upload course Image`;
+  return this.http.post(url,formData);
 }
 checkCourse(id:string,token:string,courseId:number){
   const request={

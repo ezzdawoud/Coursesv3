@@ -11,12 +11,14 @@ import Swal from 'sweetalert2';
 })
 export class AddCourseComponent {
   form: any;
+  isLoading=false;
+
   constructor(private formBuilder: FormBuilder, private services: ServicesService,private router:Router) {
     this.selectedCategory = "Technology"; 
     this.selectedType = "Database Management";
     this.form = this.formBuilder.group({
       couresName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      couresDescription: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(100)]],
+      couresDescription: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(200)]],
       couresType: [this.selectedType, Validators.required],
       coursesCatagory: [this.selectedCategory, Validators.required],
       couresLanguage: ['English', Validators.required],
@@ -93,7 +95,7 @@ export class AddCourseComponent {
   timeRemaining: any | null = null;
   timeRemainingFormatted: string = '';
   showImagePreview = false;
-
+selectfile:any
   toggleImagePreview() {
     this.showImagePreview = !this.showImagePreview;
     this.toggleBodyScrolling(!this.showImagePreview); // Enable/disable scrolling
@@ -122,7 +124,7 @@ export class AddCourseComponent {
         event.target.value = ''; 
         return;
       }
-      
+      this.selectfile=file;
       reader.onprogress = (e: ProgressEvent<FileReader>) => {
         if (e.lengthComputable) {
           this.loadingProgress = (e.loaded / e.total) * 100;
@@ -182,12 +184,12 @@ export class AddCourseComponent {
       this.couresDescriptionValid = false;
     }
     else if (this.form.get("couresDescription").hasError("minlength")) {
-      this.couresDescriptionValidLabel = "coures Description must be between 16-100"
+      this.couresDescriptionValidLabel = "coures Description must be between 16-200"
       this.couresDescriptionValid = false;
       
     }
     else if (this.form.get("couresDescription").hasError("maxlength")) {
-      this.couresDescriptionValidLabel = "coures Description must be between 16-100"
+      this.couresDescriptionValidLabel = "coures Description must be between 16-200"
       this.couresDescriptionValid = false;
     }
     else {
@@ -215,6 +217,7 @@ export class AddCourseComponent {
     }
 
     if (this.form.valid) {
+      this.isLoading=true
       if (this.usersDatalocal && this.usersDatalocal.length > 0) {
         var userid = JSON.parse(this.usersDatalocal!).id;
         var token = JSON.parse(this.usersDatalocal!).usertoken;
@@ -230,16 +233,30 @@ export class AddCourseComponent {
           pictures: "https://res.cloudinary.com/dolmafyz2/image/upload/v1713007441/jsnplpujnxbw9offwblm.png",
           "token":token
         }
+
         this.services.insertCourse(course).subscribe((response: any) => {
-          // if (this.form.get("file").value != null) {
-          //   let fileToUpload = <File>file[0];
-          //   const formData = new FormData();
-          //   formData.append('file', fileToUpload, fileToUpload.name);
-          //   this.services.uploadcourseImage(userid, token, response.courseId, formData).subscribe((response) => {
-          //   }
-          //     , (error) => {
-          //     })
-          // }
+          console.log(response)
+          if (this.selectfile) {
+        
+            this.services.uploadcourseImage(userid, token, response.courseId, this.selectfile).subscribe((response) => {
+              this.isLoading=false
+
+              Swal.fire({
+                title: "Success",
+                text: "insert done",
+                icon: "success"
+              });     
+              this.router.navigate(["/teacher"])
+              this.form.reset()
+            }
+              , (error) => {
+                this.isLoading=false
+                console.log(error)
+              })
+          }
+          else{
+            this.isLoading=false
+
           Swal.fire({
             title: "Success",
             text: "insert done",
@@ -248,8 +265,10 @@ export class AddCourseComponent {
           this.router.navigate(["/teacher"])
           this.form.reset()
           
-        },
+        }},
           (error) => {
+            this.isLoading=false
+
             Swal.fire({
               title: "Error",
               text: "something wrong",
@@ -260,6 +279,7 @@ export class AddCourseComponent {
       }
     }
     else {
+      this.isLoading=false
 
     }
   }

@@ -17,10 +17,13 @@ export class UpdateCourseComponent {
   };
   usersDatalocal = localStorage.getItem("user");
 courseId:any;
+isLoading=true;
+
   constructor(private formBuilder: FormBuilder, private services: ServicesService,private router:Router,private http:HttpClient,private parms:ActivatedRoute) {
    
     this.parms.params.subscribe(data => { this.courseId = data })
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+      
       var id = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
       const request={
@@ -28,6 +31,7 @@ courseId:any;
         "userId":id,
         "courseId":this.courseId.courseId
         }    
+
     const url = `https://corzacademy.runasp.net/api/courses/getCourseDataForTeacher`;
 this.http.post(url,request).subscribe((response)=>{
   this.courseData=response;
@@ -42,8 +46,11 @@ this.http.post(url,request).subscribe((response)=>{
   }
 );
 this.selectedImage=this.courseData.pictures
+this.isLoading=false
 
 },(error)=>{
+  this.isLoading=false
+
   this.router.navigate(["/teacher"])
   console.log(error)
 
@@ -56,7 +63,7 @@ this.selectedImage=this.courseData.pictures
     this.selectedType = "Database Management";
     this.form = this.formBuilder.group({
       couresName: [this.courseData.couresName, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      couresDescription: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(100)]],
+      couresDescription: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(200)]],
       couresType: [this.selectedType, Validators.required],
       coursesCatagory: [this.selectedCategory, Validators.required],
       couresLanguage: ['English', Validators.required],
@@ -145,6 +152,8 @@ this.selectedImage=this.courseData.pictures
       document.body.style.overflow = 'hidden'; // Disable scrolling
     }
   }
+  selectfile:any
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
     const reader: FileReader = new FileReader();
@@ -162,7 +171,8 @@ this.selectedImage=this.courseData.pictures
         event.target.value = ''; 
         return;
       }
-      
+      this.selectfile=file;
+
       reader.onprogress = (e: ProgressEvent<FileReader>) => {
         if (e.lengthComputable) {
           this.loadingProgress = (e.loaded / e.total) * 100;
@@ -254,7 +264,10 @@ this.selectedImage=this.courseData.pictures
     }
 
     if (this.form.valid) {
+
       if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+        this.isLoading=true
+
         var userid = JSON.parse(this.usersDatalocal!).id;
         var token = JSON.parse(this.usersDatalocal!).usertoken;
 
@@ -270,16 +283,26 @@ this.selectedImage=this.courseData.pictures
           "courseId":this.courseId.courseId
           
         }
+        console.log(this.selectfile)
         this.services.updatecouese(course).subscribe((response: any) => {
-          // if (this.form.get("file").value != null) {
-          //   let fileToUpload = <File>file[0];
-          //   const formData = new FormData();
-          //   formData.append('file', fileToUpload, fileToUpload.name);
-          //   this.services.uploadcourseImage(userid, token, response.courseId, formData).subscribe((response) => {
-          //   }
-          //     , (error) => {
-          //     })
-          // }
+          if (this.selectfile) {
+            
+            this.services.uploadcourseImage(userid, token, this.courseId.courseId, this.selectfile).subscribe((response) => {
+              this.isLoading=false
+              Swal.fire({
+                title: "success",
+                text: "update done",
+                icon: "success"
+              });  
+            }
+              , (error) => {
+                console.log(error)
+                this.isLoading=false
+
+              })
+          }
+          else{
+            this.isLoading=false
           Swal.fire({
             title: "success",
             text: "update done",
@@ -288,7 +311,7 @@ this.selectedImage=this.courseData.pictures
           this.router.navigate(["/teacher"])
           this.form.reset()
           
-        },
+        }},
           (error) => {
             console.log(error)
           }
@@ -300,6 +323,7 @@ this.selectedImage=this.courseData.pictures
     }
   }
   deleteCourse(){
+    this.isLoading=true
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
       var userid = JSON.parse(this.usersDatalocal!).id;
       var token = JSON.parse(this.usersDatalocal!).usertoken;
@@ -318,6 +342,8 @@ const request={
     }).then((result) => {
       if (result.isConfirmed) {
         this.http.post(url,request).subscribe((response)=>{
+          this.isLoading=false
+
           Swal.fire({
             title: "success",
             text: "delete done",
@@ -325,6 +351,8 @@ const request={
           });   
           this.router.navigate(["/teacher"])
         },(error)=>{
+          this.isLoading=false
+
           console.log(error)
           Swal.fire({
             title: "error",
@@ -335,6 +363,7 @@ const request={
         
         )
       } else if (result.isDenied) {
+        this.isLoading=false
         Swal.fire('deleted not saved', '', 'info')
       }
     })

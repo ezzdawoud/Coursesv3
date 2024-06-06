@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="insertCourse(file.files)">
+<form [formGroup]="form" (ngSubmit)="insertCourse(file.files)" *ngIf="!isLoading">
   <h1 class="title1">Update course</h1>
   <div class="container">
     <div>
@@ -139,3 +139,10 @@
     </div>
   </div>
 </form>
+
+
+<div *ngIf="isLoading" class="load">
+  <div class="one"></div>
+  <div class="two"></div>
+  <div class="three"></div>
+</div>

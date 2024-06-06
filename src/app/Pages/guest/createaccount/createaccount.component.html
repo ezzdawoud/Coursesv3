@@ -39,6 +39,19 @@
                 <label style="color: red;">{{validLablePhoneNumber}}</label>
             </div>
           
+               <div style="width: 100%;">
+                <select style="width:100%;height: 50px;text-align: center;margin-top: 20px;" #event (change)="Role(event.value)">
+                    <option [disabled]="true">Role</option>
+                    <option>Users</option>
+                    <option>Teacher</option>
+
+                </select>
+               </div>
+               <div class="coolinput" *ngIf="teahcer">
+                <label for="input" class="text" style="z-index: 1;">About me:</label>
+                <textarea type="text" style="padding: 5px;"  placeholder="About your self" name="input" class="input keycontry" formControlName="AboutMe" > </textarea>       
+            <label style="color: red;">{{ValidLableAboutMe}}</label>
+              </div>
             <div style="width: 100%;">
                 <input type="submit" class="b1" value="Create account">
             </div>

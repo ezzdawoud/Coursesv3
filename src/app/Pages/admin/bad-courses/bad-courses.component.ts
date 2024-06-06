@@ -10,8 +10,11 @@ import Swal from 'sweetalert2';
 export class BadCoursesComponent {
   usersDatalocal: any = localStorage.getItem("user");
   badCourses:any=[{}]
+  isLoading = false;
+
 constructor(private http:HttpClient){
   if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+    this.isLoading=true
     var userid = JSON.parse(this.usersDatalocal!).id;
     var token = JSON.parse(this.usersDatalocal!).usertoken;
     const request={
@@ -21,6 +24,8 @@ constructor(private http:HttpClient){
     const url=`https://corzacademy.runasp.net/api/Courses/Bad Courses`
     this.http.post(url,request).subscribe((response:any)=>{
 this.badCourses=response;
+this.isLoading=false
+
 }
   
   )
@@ -29,7 +34,10 @@ this.badCourses=response;
 }
 
 deleteCourse(courseId:number){
+
   if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+    this.isLoading=true
+
     var userid = JSON.parse(this.usersDatalocal!).id;
     var token = JSON.parse(this.usersDatalocal!).usertoken;
 const request={
@@ -49,8 +57,12 @@ Swal.fire({
   this.http.post(url, request).subscribe((response) => {
 console.log("done")
 this.badCourses = this.badCourses.filter((course:any) => course.courseId !== courseId);
+this.isLoading=false
+
   },
   (error)=>{
+    this.isLoading=false
+
     console.log(error)
   }
 

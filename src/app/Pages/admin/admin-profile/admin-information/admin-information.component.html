@@ -61,11 +61,7 @@
             <input type="email" placeholder="Write here..." class="input" formControlName="Email">
             <label style="color: red;" *ngIf="!isEditingVar">*To change your email go to security</label>
         </div>
-        <div class="coolinput">
-            <label for="input" class="text" style="z-index: 1;">About me:</label>
-            <textarea type="text" style="padding: 5px;"  placeholder="About your self" name="input" class="input keycontry" formControlName="AboutMe"  (change)="ischaging()"> </textarea>       
-        <label style="color: red;">{{ValidLableAboutMe}}</label>
-          </div>
+    
         <div class="buttoms">
             <div style="margin: 10px;">
                 <input type="submit" class="b1" value="Edit Informations" (click)="isEditing()">
