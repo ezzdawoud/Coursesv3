@@ -83,5 +83,7 @@ this.loader.showLoader();
 
   logout() {
     this.authService.logout();
+    this.route.navigate([""]);
+
   }
 }

@@ -66,6 +66,8 @@ export class AdminPagesComponent {
   }
   logout() {
     this.authService.logout();
+    this.route.navigate([""]);
+
   }
   sidebarActive = false;
 
