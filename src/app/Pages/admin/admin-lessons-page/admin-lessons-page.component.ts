@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, SecurityContext } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
-import { Pipe, PipeTransform } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-lessons-page',
-  templateUrl: './lessons-page.component.html',
-  styleUrls: ['./lessons-page.component.css']
+  selector: 'app-admin-lessons-page',
+  templateUrl: './admin-lessons-page.component.html',
+  styleUrls: ['./admin-lessons-page.component.css']
 })
-
-export class LessonsPageComponent implements PipeTransform{
+export class AdminLessonsPageComponent {
   usersDatalocal: any = localStorage.getItem("user");
   idOfCourse: any;
   idOfLessons: any;
@@ -68,7 +66,7 @@ console.log(error)
           else{
             this.thereIsNoLessons=false;
 
-            this.router.navigate(["/Lessons",this.idOfCourse,1])
+            this.router.navigate(['/admin','lessonsPage',this.idOfCourse,1])
           }
           this.isLoading = false
         })
@@ -100,7 +98,7 @@ console.log(error)
     if (this.idOfLessons > 1) {
       const prevLessonId = this.idOfLessons - 1;
       // Navigate to the previous lesson route
-      this.router.navigate(['/Lessons', this.idOfCourse,prevLessonId]);
+      this.router.navigate(['/admin','lessonsPage', this.idOfCourse,prevLessonId]);
     }
   }
 commentsCheckerLabel="";

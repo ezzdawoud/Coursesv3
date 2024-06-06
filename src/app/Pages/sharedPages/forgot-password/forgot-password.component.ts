@@ -19,19 +19,19 @@ export class ForgotPasswordComponent {
   forgotPasswordMethod() {
     let isValid = false;
     if (this.forgotPassword.get('Email').hasError('required')) {
-      this.validLableEmail = "required"
+      this.validLableEmail = "This field is required"
       isValid = false;
     }
     else if (this.forgotPassword.get('Email').hasError('maxlength')) {
-      this.validLableEmail = "maxlength"
+      this.validLableEmail = "Length must be between 3-50"
       isValid = false;
     }
     else if (this.forgotPassword.get('Email').hasError('minlength')) {
-      this.validLableEmail = "minlength"
+      this.validLableEmail = "length must be between 3-50"
       isValid = false;
     }
     else if (this.forgotPassword.get('Email').hasError('email')) {
-      this.validLableEmail = "email"
+      this.validLableEmail = "Enter valid Email 'user@example.com'"
       isValid = false;
     }
     else {
@@ -51,9 +51,10 @@ export class ForgotPasswordComponent {
           icon: "success"
         });  
       },(error)=>{
+        console.log(error)
         Swal.fire({
           title: "Error",
-          text: error.message,
+          text: error.error.message,
           icon: "error"
         });  
       }

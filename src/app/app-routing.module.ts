@@ -30,11 +30,11 @@ const routes: Routes = [
 
 ]},
 
-{path:"admin",component:AdminPagesComponent,children:[{
-    path:"d",loadChildren:()=>import('./Pages/sharedPages/home-page/home-page.module').then(m=>m.HomePageModule)
-  },
-  {path:"profile",loadChildren:()=>import('./Pages/sharedPages/profile/profile.module').then(m=>m.ProfileModule)},
+{path:"admin",component:AdminPagesComponent,children:[
   {path:"",loadChildren:()=>import('./Pages/admin/admin-dashboard/admin-dashboard.module').then(m=>m.AdminDashboardModule)},
+  {path:"profile",loadChildren:()=>import('./Pages/sharedPages/profile/profile.module').then(m=>m.ProfileModule)},
+  {path:"badCourses",loadChildren:()=>import('./Pages/admin/bad-courses/bad-courses.module').then(m=>m.BadCoursesModule)},
+  {path:"lessonsPage/:courseId/:lessonsId",loadChildren:()=>import('./Pages/admin/admin-lessons-page/admin-lessons-page.module').then(m=>m.AdminLessonsPageModule)},
 
 ]
   ,canActivate:[AdminGuard]},

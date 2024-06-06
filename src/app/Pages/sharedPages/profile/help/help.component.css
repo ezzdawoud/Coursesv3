@@ -85,7 +85,7 @@ margin-top: 10px;
 
 .accordion {
   cursor: pointer;
-  width: 400px ;
+  width:100% ;
   
 }
 
@@ -109,4 +109,10 @@ margin-top: 10px;
   max-height: 0;
   margin: 10px;
   text-align: center;
+}
+
+@media (max-width:900px) {
+.procont{
+  width: 92%;
+}
 }

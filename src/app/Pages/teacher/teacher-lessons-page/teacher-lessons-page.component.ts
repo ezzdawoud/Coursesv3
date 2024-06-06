@@ -25,10 +25,10 @@ userid="";
     console.log("heelloo")
     this.isLoading = true;
     this.parms.params.subscribe((parms: any) => {
+      this.isLoading=true
       this.idOfCourse = parms.courseId;
       this.idOfLessons = parms.lessonsId;
-      this.isLoading = true;
-
+    
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {
       var userid = JSON.parse(this.usersDatalocal!).id;
       this.userid=userid;
@@ -50,15 +50,22 @@ userid="";
             this.comments=response;
             this.isLoading=false
             console.log(this.comments)
-          },(error)=>{})
+          },(error)=>{
+console.log(error)
+
+          })
+          this.isLoading=false
+
           this.thereIsNoLessons=false;
 
         }, (error) => {
           if(this.idOfLessons==1){
+
             this.thereIsNoLessons=true;
           }
           else{
             this.thereIsNoLessons=false;
+
             this.router.navigate(["/Lessons",this.idOfCourse,1])
           }
           this.isLoading = false
@@ -91,7 +98,7 @@ userid="";
     if (this.idOfLessons > 1) {
       const prevLessonId = this.idOfLessons - 1;
       // Navigate to the previous lesson route
-      this.router.navigate(['teacher','lessons', this.idOfCourse,prevLessonId]);
+      this.router.navigate(['/Lessons', this.idOfCourse,prevLessonId]);
     }
   }
 commentsCheckerLabel="";
@@ -128,7 +135,7 @@ value.value = "";
   }
 }
 }
-delteComment(value:number,index:number,commentType:number,subCommentIndex:number){
+deleteComment(value: number, index: number, commentType: number, subCommentIndex: number) {
   Swal.fire({
     title: 'Do you want to delete this comment?',
     showDenyButton: true,
@@ -137,177 +144,186 @@ delteComment(value:number,index:number,commentType:number,subCommentIndex:number
     denyButtonText: 'No',
   }).then((result) => {
     if (result.isConfirmed) {
-  if (this.usersDatalocal && this.usersDatalocal.length > 0) {
-    var userid = JSON.parse(this.usersDatalocal!).id;
-    var token = JSON.parse(this.usersDatalocal!).usertoken;
-    if(commentType==1){
-      this.comments.splice(index, 1);}
-      else{
-       this.comments[index].comment.subComments.splice(subCommentIndex,1);
-      }
-      const request={
-        "courseId":this.idOfCourse,
-        "lessonsNumber":this.idOfLessons,
-        "id":userid,
-        "token":token,
-        "commentId":value,
-        "commentType":commentType
-      }
-const url = `https://corzacademy.runasp.net/api/lessons/delete comment`;
-this.http.post(url, request).subscribe((response) => {
-
+      if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+        const userid = JSON.parse(this.usersDatalocal!).id;
+        const token = JSON.parse(this.usersDatalocal!).usertoken;
+        
+        const request = {
+          "courseId": this.idOfCourse,
+          "lessonsNumber": this.idOfLessons,
+          "id": userid,
+          "token": token,
+          "commentId": value,
+          "commentType": commentType
+        };
   
-})
-}}
-else if (result.isDenied) {
-  Swal.fire('deleted not saved', '', 'info')
-}
-})
-}
-subCommentsCheckerLabel="";
-subCommentsChecker=false;
-addSubComment(value:any,commentsId:number,index:number){
-  if(value.value.length>250){
-    this.subCommentsCheckerLabel="letter must be <250";
-    this.subCommentsChecker=true;
-        }
-        else if (value.value.trim().length === 0) {
-          this.subCommentsCheckerLabel = "Comment cannot be empty";
-          this.subCommentsChecker=true;
-        }
-        else{
-          this.subCommentsCheckerLabel = "";
-          this.subCommentsChecker=false;
-          if (this.usersDatalocal && this.usersDatalocal.length > 0) {
-            var userid = JSON.parse(this.usersDatalocal!).id;
-            var token = JSON.parse(this.usersDatalocal!).usertoken;
-            const request={
-              "courseId":this.idOfCourse,
-              "lessonsNumber":this.idOfLessons,
-              "id":userid,
-              "token":token,
-              "commentId":commentsId,
-              "comments":value.value
-            }
-            const url = `https://corzacademy.runasp.net/api/lessons/add Sub comment`;
-            this.http.post(url, request).subscribe((response) => {
-              console.log(response);
-              console.log(this.comments[index].comment.subComments);
-              this.comments[index].comment.subComments.push(response);
-              value.value = "";
-            
-            })
+        const url = `https://corzacademy.runasp.net/api/lessons/delete comment`;
+        this.http.post(url, request).subscribe((response) => {
+          if (commentType === 1) {
+            this.comments.splice(index, 1);
+          } else {
+            this.comments[index].subComments.splice(subCommentIndex, 1);
           }
+          // Optionally, trigger change detection or update UI here
+        });
+      }
+    } else if (result.isDenied) {
+      Swal.fire('deleted not saved', '', 'info');
+    }
+  });
+}
+
+  subCommentsCheckerLabel="";
+  subCommentsChecker=false;
+  addSubComment(value:any,commentsId:number,index:number){
+    if(value.value.length>250){
+      this.subCommentsCheckerLabel="letter must be <250";
+      this.subCommentsChecker=true;
+          }
+          else if (value.value.trim().length === 0) {
+            this.subCommentsCheckerLabel = "Comment cannot be empty";
+            this.subCommentsChecker=true;
+          }
+          else{
+            this.subCommentsCheckerLabel = "";
+            this.subCommentsChecker=false;
+            if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+              var userid = JSON.parse(this.usersDatalocal!).id;
+              var token = JSON.parse(this.usersDatalocal!).usertoken;
+              const request={
+                "courseId":this.idOfCourse,
+                "lessonsNumber":this.idOfLessons,
+                "id":userid,
+                "token":token,
+                "commentId":commentsId,
+                "comments":value.value
+              }
+              const url = `https://corzacademy.runasp.net/api/lessons/add Sub comment`;
+              this.http.post(url, request).subscribe((response) => {
+                console.log(response)
+                console.log(this.comments[index].subComments)
+               this.comments[index].subComments.push(response);
+                value.value = "";
+              
+              })
+            }
+          }
+  }
+  addLikeReaction(commentId: number, reaction: boolean, commentType: number, index: number, indexSubComment: number) {
+    if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+      const userid = JSON.parse(this.usersDatalocal!).id;
+      const token = JSON.parse(this.usersDatalocal!).usertoken;
+      const newReaction = {
+        "courseId": this.idOfCourse,
+        "lessonsNumber": this.idOfLessons,
+        "id": userid,
+        "token": token,
+        "commentId": commentId,
+        "userReaction": reaction,
+        "commentsType": commentType
+      };
+      if (commentType === 1) {
+        if (this.comments && this.comments[index] &&this.comments[index]) {
+          console.log(this.comments[index])
+          this.comments[index].isLiked = reaction;
+          this.comments[index].like = (this.comments[index].like || 0) + 1;
         }
-}
-addLikeReaction(commentId:number,reaction:boolean,commentType:number,index:number,indexSubComment:number){
-  if (this.usersDatalocal && this.usersDatalocal.length > 0) {
-    var userid = JSON.parse(this.usersDatalocal!).id;
-    var token = JSON.parse(this.usersDatalocal!).usertoken;
- var newReation={
-    "courseId": this.idOfCourse,
-    "lessonsNumber": this.idOfLessons,
-    "id": userid,
-    "token": token,
-    "commentId": commentId,
-    "userReaction": reaction,
-    "commentsType": commentType
+      } else {
+        if (this.comments && this.comments[index] &&this.comments[index] &&
+            this.comments[index].subComments &&this.comments[index].subComments[indexSubComment]) {
+          this.comments[index].subComments[indexSubComment].isLiked = reaction;
+          this.comments[index].subComments[indexSubComment].like =
+            (this.comments[index].subComments[indexSubComment].like || 0) + 1;
+        }
+      }
+      const url = `https://corzacademy.runasp.net/api/lessons/add reaction`;
+      this.http.post(url, newReaction).subscribe((response: any) => {
+       
+        // Optionally, trigger change detection or update UI here
+      });
+    }
   }
-  if(commentType==1){
-  this.comments[index].comment.isLiked = reaction;
-    this.comments[index].comment.Like =  this.comments[index].comment.like++;
- }
-  else{
-    console.log(commentId)
-    this.comments[index].comment.subComments[indexSubComment].isLiked = reaction;
-    this.comments[index].comment.subComments[indexSubComment].Like=this.comments[index].comment.subComments[indexSubComment].like++;
-
-  }
-  const url = `https://corzacademy.runasp.net/api/lessons/add reaction`;
-this.http.post(url, newReation).subscribe((response) => {
-
-})
-}
-}
-addDisLikeReaction(commentId:number,reaction:boolean,commentType:number,index:number,indexSubComment:number){
-  if (this.usersDatalocal && this.usersDatalocal.length > 0) {
-    var userid = JSON.parse(this.usersDatalocal!).id;
-    var token = JSON.parse(this.usersDatalocal!).usertoken;
- var newReation={
-    "courseId": this.idOfCourse,
-    "lessonsNumber": this.idOfLessons,
-    "id": userid,
-    "token": token,
-    "commentId": commentId,
-    "userReaction": reaction,
-    "commentsType": commentType
-  }
-  if(commentType==1){
-  this.comments[index].comment.isDisliked = true;
-    this.comments[index].comment.disLike =  this.comments[index].comment.dislike++;
- }
-  else{
-    console.log(commentId)
-    this.comments[index].comment.subComments[indexSubComment].isDisliked = true;
-    this.comments[index].comment.subComments[indexSubComment].disLike=this.comments[index].comment.subComments[indexSubComment].dislike++;
-
-  }
-  const url = `https://corzacademy.runasp.net/api/lessons/add reaction`;
-this.http.post(url, newReation).subscribe((response) => {
-
-})
-}
-}
-deleteLikeReaction(commentId:number,commentType:number,index:number,indexSubComment:number){
-  if (this.usersDatalocal && this.usersDatalocal.length > 0) {
-    var userid = JSON.parse(this.usersDatalocal!).id;
-    var token = JSON.parse(this.usersDatalocal!).usertoken;
+  
+  addDisLikeReaction(commentId:number,reaction:boolean,commentType:number,index:number,indexSubComment:number){
+    if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+      var userid = JSON.parse(this.usersDatalocal!).id;
+      var token = JSON.parse(this.usersDatalocal!).usertoken;
+  var newReation={
+      "courseId": this.idOfCourse,
+      "lessonsNumber": this.idOfLessons,
+      "id": userid,
+      "token": token,
+      "commentId": commentId,
+      "userReaction": reaction,
+      "commentsType": commentType
+    }
     if(commentType==1){
-      this.comments[index].comment.isLiked = false;
-        this.comments[index].comment.Like =  this.comments[index].comment.like--;
-     }
-      else{
-        console.log(commentId)
-        this.comments[index].comment.subComments[indexSubComment].isLiked = false;
-        this.comments[index].comment.subComments[indexSubComment].Like=this.comments[index].comment.subComments[indexSubComment].like--;
-    
-      }
-      const request={
-        "id":userid,
-        "token":token,
-        "commentId":commentId,
-        "commentType":commentType
-      }
-  const url = `https://corzacademy.runasp.net/api/lessons/delete reaction`;
-this.http.post(url, request).subscribe((response) => {
+   this.comments[index].isDisliked = true;
+     this.comments[index].disLike = this.comments[index].dislike++;
+  }
+    else{
+      console.log(commentId)
+     this.comments[index].subComments[indexSubComment].isDisliked = true;
+     this.comments[index].subComments[indexSubComment].disLike=this.comments[index].subComments[indexSubComment].dislike++;
 
-})
-}
-}
-deleteDisLikeReaction(commentId:number,commentType:number,index:number,indexSubComment:number){
-  if (this.usersDatalocal && this.usersDatalocal.length > 0) {
-    var userid = JSON.parse(this.usersDatalocal!).id;
-    var token = JSON.parse(this.usersDatalocal!).usertoken;
-    if(commentType==1){
-      this.comments[index].comment.isDisliked = false;
-        this.comments[index].comment.disLike =  this.comments[index].comment.dislike--;
-     }
-      else{
-        console.log(commentId)
-        this.comments[index].comment.subComments[indexSubComment].isDisliked = false;
-        this.comments[index].comment.subComments[indexSubComment].disLike=this.comments[index].comment.subComments[indexSubComment].dislike--;
-    
-      }
-      const request={
-        "id":userid,
-        "token":token,
-        "commentId":commentId,
-        "commentType":commentType
-      }
-  const url = `https://corzacademy.runasp.net/api/lessons/delete reaction`;
-this.http.post(url, request).subscribe((response) => {
+    }
+    const url = `https://corzacademy.runasp.net/api/lessons/add reaction`;
+  this.http.post(url, newReation).subscribe((response) => {
 
-})
-}
-}
-}
+  })
+  }
+  }
+
+  deleteLikeReaction(commentId: number, commentType: number, index: number, indexSubComment: number) {
+    if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+      const userid = JSON.parse(this.usersDatalocal!).id;
+      const token = JSON.parse(this.usersDatalocal!).usertoken;
+  
+      const request = {
+        "id": userid,
+        "token": token,
+        "commentId": commentId,
+        "commentType": commentType
+      };
+      if (commentType === 1) {
+        this.comments[index].isLiked = false;
+        this.comments[index].like--;
+      } else {
+        this.comments[index].subComments[indexSubComment].isLiked = false;
+        this.comments[index].subComments[indexSubComment].like--;
+      }
+      const url = `https://corzacademy.runasp.net/api/lessons/delete reaction`;
+      this.http.post(url, request).subscribe((response) => {
+       
+        // Optionally, trigger change detection or update UI here
+      });
+    }
+  }
+  
+
+  deleteDisLikeReaction(commentId: number, commentType: number, index: number, indexSubComment: number) {
+    if (this.usersDatalocal && this.usersDatalocal.length > 0) {
+      const userid = JSON.parse(this.usersDatalocal!).id;
+      const token = JSON.parse(this.usersDatalocal!).usertoken;
+  
+      const request = {
+        "id": userid,
+        "token": token,
+        "commentId": commentId,
+        "commentType": commentType
+      };
+      if (commentType === 1) {
+        this.comments[index].isDisliked = false;
+        this.comments[index].dislike--;
+      } else {
+        this.comments[index].subComments[indexSubComment].isDisliked = false;
+        this.comments[index].subComments[indexSubComment].dislike--;
+      }
+      const url = `https://corzacademy.runasp.net/api/lessons/delete reaction`;
+      this.http.post(url, request).subscribe((response) => {
+       
+        // Optionally, trigger change detection or update UI here
+      });
+    }
+  }
+}  

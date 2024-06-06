@@ -107,10 +107,10 @@ else{
       this.validLablePhoneNumber="This field is required"
     }
     else if(this.creatAccount.get('PhoneNumber').hasError('minlength') ){
-      this.validLablePhoneNumber="length must be between 4-16"
+      this.validLablePhoneNumber="length must be exactly 10"
     }
     else if(this.creatAccount.get('PhoneNumber').hasError('maxlength')){
-      this.validLablePhoneNumber="length must be between 4-16"
+      this.validLablePhoneNumber="length must be exactly 10"
     }
     else{
       this.validLablePhoneNumber=""

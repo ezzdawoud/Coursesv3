@@ -149,6 +149,7 @@ background-color: rgb(223, 23, 23);
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  flex-wrap: wrap;
 
 }
 
@@ -199,5 +200,12 @@ background-color: rgb(223, 23, 23);
   to {
     opacity: 0.2;
     transform: translatey(-20px);
+  }
+}
+
+@media (max-width:900px) {
+  
+  .procont{
+    width: 100%;
   }
 }

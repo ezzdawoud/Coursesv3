@@ -234,6 +234,10 @@ if(this.updateDataForm.get("phone").hasError("required")){
   )
     
   }
+  else
+  {
+    this.isLoading=false;
+  }
 }
 }
 }
