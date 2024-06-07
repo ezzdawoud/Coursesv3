@@ -38,7 +38,7 @@ this.cards=response
 
   startIndex = 0;
 
-  visibleCards =4;
+  visibleCards =3;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -47,7 +47,7 @@ this.cards=response
 
   updateVisibleCards() {
     if (window.innerWidth >= 950) {
-      this.visibleCards = 4; // For screen width >= 950, show 5 cards
+      this.visibleCards = 3; // For screen width >= 950, show 5 cards
     } else if(window.innerWidth >= 500){
       this.visibleCards = 3; // For screen width < 950, show 3 cards
     }else{
