@@ -29,7 +29,7 @@
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" *ngFor="let lessons of lessonsDate.courseLessons" routerLink="/Lessons/{{lessons.courseId}}/{{lessons.lessonsNum}}">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" *ngFor="let lessons of lessonsDate.courseLessons" routerLink="/teacher/lessons/{{lessons.courseId}}/{{lessons.lessonsNum}}">
                             <div class="card-body">
                                 <div style="display:flex ; justify-content:space-between;">
                                     <button class="classbutton"> {{lessons.lessonsName}}</button>
@@ -137,7 +137,7 @@
                           <div style="width: 100%;" >
                             <p>{{ comment.comments }}</p>
                           </div>
-                          <div style="display: flex; justify-content: space-between; width: 150px; margin-top: 10px;">
+                          <div style="display: flex; justify-content: space-between; width: 65px; margin-top: 10px;">
                             <div style="display: flex; justify-content: center; align-items: center;">
                            <label style="cursor: pointer;" (click)="addLikeReaction(comment.commentId,true,1,i,0)"><i class="bi bi-hand-thumbs-up-fill"  *ngIf="!comment.isLiked && !comment.isDisliked" style="color: darkgray; font-size: 20px;"></i></label>
                            <label >  <i class="bi bi-hand-thumbs-up-fill" *ngIf="!comment.isLiked && comment.isDisliked" style="color: rgb(128, 128, 128); font-size: 20px;"></i></label>
@@ -151,7 +151,6 @@
                                   <label style="cursor: pointer;" (click)="deleteDisLikeReaction(comment.commentId,1,i,0)">  <i class="bi bi-hand-thumbs-down-fill" *ngIf="comment.isDisliked" style="color: rgb(255, 0, 0); font-size: 20px;"></i></label > 
                               {{ comment.dislike }}
                             </div>
-                            <a href="" style="margin-left: 5px; text-decoration: none; color: #663cfa;">replay</a>
                           </div>
                       
                           <!-- Display sub-comments -->

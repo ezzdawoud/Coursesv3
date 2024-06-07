@@ -98,7 +98,7 @@ console.log(error)
     if (this.idOfLessons > 1) {
       const prevLessonId = this.idOfLessons - 1;
       // Navigate to the previous lesson route
-      this.router.navigate(['/Lessons', this.idOfCourse,prevLessonId]);
+      this.router.navigate(['teacher/lessons', this.idOfCourse,prevLessonId]);
     }
   }
 commentsCheckerLabel="";
