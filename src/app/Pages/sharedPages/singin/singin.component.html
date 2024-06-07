@@ -9,12 +9,12 @@
                 </div>
                 <div class="coolinput">
                     <label for="input" class="text">Email:</label>
-                        <input type="email" placeholder="Write here..."  class="input"  formControlName="userEmail">
+                        <input type="email" placeholder=""  class="input"  formControlName="userEmail">
                     <label style="color: red;"> {{validLableEmail}}</label>
                 </div>
                 <div class="coolinput">
                     <label for="input" class="text">Password:</label>
-                    <input [type]="password" placeholder="Write here..." class="input" formControlName="password">
+                    <input [type]="password" placeholder="" class="input" formControlName="password">
                     <label class="passwordeye" (click)="passwordeye()">
                         <i class="bi bi-eye" *ngIf="!show"></i>
                         <i class="bi bi-eye-slash-fill" *ngIf="show"></i>

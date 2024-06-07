@@ -90,7 +90,7 @@ originalUsersData: any;
 originalTeachersData: any;
 currentPageUsers = 1;
 currentPageTeachers = 1;
-pageSize = 10;
+pageSize = 5;
 
 
 
