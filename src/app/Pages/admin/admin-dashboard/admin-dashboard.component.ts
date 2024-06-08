@@ -164,7 +164,7 @@ searchTeachers(value: string): void {
 }
 
 
-deletedUser(userId:string){
+deletedUser(userId:string,type:boolean){
   Swal.fire({
     title: 'Do you want to delete this comment?',
     showDenyButton: true,
@@ -188,7 +188,13 @@ deletedUser(userId:string){
             text: "deleted done",
             icon: "success"
           })
+          if(type){
           this.usersData = this.usersData.filter(user => user.id !== userId);
+        }
+        else{
+          this.teachersData = this.teachersData.filter(user => user.id !== userId);
+
+        }
         },(error)=>{
           console.log(error)
         })  

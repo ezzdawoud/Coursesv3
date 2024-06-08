@@ -66,7 +66,7 @@ console.log(error)
           else{
             this.thereIsNoLessons=false;
 
-            this.router.navigate(['/admin','lessonsPage',this.idOfCourse,1])
+            this.router.navigate(["/Lessons",this.idOfCourse,1])
           }
           this.isLoading = false
         })
@@ -98,7 +98,7 @@ console.log(error)
     if (this.idOfLessons > 1) {
       const prevLessonId = this.idOfLessons - 1;
       // Navigate to the previous lesson route
-      this.router.navigate(['/admin','lessonsPage', this.idOfCourse,prevLessonId]);
+      this.router.navigate(['teacher/lessons', this.idOfCourse,prevLessonId]);
     }
   }
 commentsCheckerLabel="";

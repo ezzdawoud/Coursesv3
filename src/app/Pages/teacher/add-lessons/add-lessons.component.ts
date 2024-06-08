@@ -18,7 +18,7 @@ export class AddLessonsComponent {
   constructor(private route: ActivatedRoute, private http: HttpClient,private router:Router,private from:FormBuilder) {
 
     this.addform=this.from.group({
-      lessonsName:['',[Validators.required,Validators.maxLength(16),Validators.minLength(4)]],
+      lessonsName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(4)]],
       lessonsDescription:['',[Validators.required,Validators.maxLength(100),Validators.minLength(16)]],
     })
     if (this.usersDatalocal && this.usersDatalocal.length > 0) {

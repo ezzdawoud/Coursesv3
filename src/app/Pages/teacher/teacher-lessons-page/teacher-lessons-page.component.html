@@ -174,15 +174,12 @@
                                   <label style="cursor: pointer;" (click)="deleteLikeReaction(subComment.commentsId,2,i,s)">  <i class="bi bi-hand-thumbs-up-fill" *ngIf="subComment.isLiked" style="color: rgb(0, 140, 255); font-size: 20px;"></i> </label >
                                     <label style="cursor: pointer;" (click)="addLikeReaction(subComment.commentsId,true,2,i,s)">  <i class="bi bi-hand-thumbs-up-fill" *ngIf="!subComment.isLiked && !subComment.isDisliked" style="color: darkgray; font-size: 20px;"></i> </label >
                                       <label >  <i class="bi bi-hand-thumbs-up-fill" *ngIf="!subComment.isLiked && subComment.isDisliked " style="color: rgb(128, 128, 128); font-size: 20px;"></i> </label >
-
-
                                   {{ subComment.like }}
                                 </div>
                                 <div style="display: flex; justify-content: center; align-items: center;">
                                   <label style="cursor: pointer;" (click)="addDisLikeReaction(subComment.commentsId,false,2,i,s)">  <i class="bi bi-hand-thumbs-down-fill" *ngIf="!subComment.isDisliked && !subComment.isLiked" style="color: darkgray; font-size: 20px;"></i></label>
                                   <label> <i class="bi bi-hand-thumbs-down-fill" *ngIf="!subComment.isDisliked && subComment.isLiked" style="color: rgb(128, 128, 128); font-size: 20px;"></i></label>
                                   <label style="cursor: pointer;" (click)="deleteDisLikeReaction(subComment.commentsId,2,i,s)"><i class="bi bi-hand-thumbs-down-fill" *ngIf="subComment.isDisliked" style="color: rgb(255, 0, 0); font-size: 20px;"></i></label>
-
                                   {{ subComment.dislike }}
                                 </div>
                               </div>

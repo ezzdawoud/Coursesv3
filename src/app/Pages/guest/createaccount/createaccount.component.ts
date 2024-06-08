@@ -147,7 +147,7 @@ else{
       this.isValidTeacher=true
 
     }
-    if(this.creatAccount.valid && this.validPassword&&this.validName){
+    if(this.creatAccount.valid && this.validPassword&&this.validName && !this.teahcer){
       this.isLoading=true;
       if(!this.teahcer){
       let newUser={
@@ -190,6 +190,7 @@ else if(this.teahcer && this.isValidTeacher){
     "usersPictrues": "https://res.cloudinary.com/dolmafyz2/image/upload/v1713036363/shakpm74duvy4snp5pll.png",
     "AboutMe":this.creatAccount.get('AboutMe').value
   }
+  console.log("doneee")
   const url = `https://corzacademy.runasp.net/api/Users/registerTeacher`;
   this.http.post(url,newUser).subscribe((response:any) => {
     this.isLoading=false;
