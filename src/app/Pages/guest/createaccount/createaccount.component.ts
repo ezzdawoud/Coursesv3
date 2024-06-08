@@ -192,6 +192,7 @@ else if(this.teahcer && this.isValidTeacher){
   }
   const url = `https://corzacademy.runasp.net/api/Users/registerTeacher`;
   this.http.post(url,newUser).subscribe((response:any) => {
+    this.isLoading=false;
     Swal.fire({
       title: "Success",
       text: response.message,
