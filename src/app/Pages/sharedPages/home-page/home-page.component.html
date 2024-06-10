@@ -5,7 +5,7 @@
   </div>
 </section><!-- End Hero -->
 <!-- features siction -->
-<h1 style="margin-top: 60px;width: 100%;text-align: center; font-weight: bolder;">Features</h1>
+<h1 style="margin-top: 60px;width: 100%;text-align: center; font-weight: bolder; font-size: 35px;">Features</h1>
 <hr style="width: 76%;margin: 20px auto;">
 <div class="features">
 <div>
@@ -14,26 +14,41 @@
     </span>
     
     <hr width="76%" />
-    <p>
-      Introducing a Roadmap to make it easier for you to reach your goal      </p>   </div>
+    <p >
+      We provide the roadmap to make it easier to reach your goal.   </p>   </div>
 
 <div>
     <img src="../../../../assets/online course.png" alt="" style="border-radius: 15px;">
 
     <hr width="76%" />
     <p>
-      Online classes that make it easier for you to understand the information        </p>
+      Online classes that make it easier for you to understand the information.      </p>
 </div>  
-<div>
-  <img src="../../../../assets/support.png" alt="" style="border-radius: 15px;">
+<div  >
+    <img src="../../../../assets/support.png" alt="" style="border-radius: 15px; ">
 
-  <hr width="76%" />
-  <p>
-    Online classes that make it easier for you to understand the information        </p>
-</div> 
+    <hr width="76%" />
+    <p>
+      Smooth and fast customer service.      </p>
+</div>
 </div>
 <h1 style="text-align: center;font-weight: bolder;font-size: 35px;">Most Common</h1>
-<div style="position:  relative;width: 95%; padding: 10px; margin: auto; border: 1px solid rgba(0, 0, 0, 0.29);border-radius: 15px;">
+<div style="width: 90%; padding: 10px; margin: auto; border: 1px solid rgba(0, 0, 0, 0.29);border-radius: 15px; display: flex;
+justify-content: space-between; align-items: center;">
+
+<div class="navigation-buttons">
+  <button style="
+  border-radius: 15px;
+  width: 100%;
+  height: 100px;
+  color: #ffffff;
+  border-color: #000000;
+  background-color: #6856A4;
+  font-size: 40px;
+  font-weight: bolder;
+  " (click)="prevCards()" [disabled]="startIndex === 0"><</button>
+  </div>
+
 <div class="carousel">
 <div *ngFor="let card of cards.slice(startIndex, startIndex + visibleCards)" class="carousel-cell">
   <!-- ======================================= -->
@@ -80,31 +95,17 @@
   <!-- ======================================= -->
 </div>
 </div>
+
 <div class="navigation-buttons">
+
 <button style="
-position: absolute;
-top: 39%;
-left: 5px;
-border-radius: 50%;
-width: 50px;
-height: 50px;
+border-radius: 15px;
+width: 100%;
+height: 100px;
 color: #ffffff;
 border-color: #000000;
 background-color: #6856A4;
-font-size: 20px;
-font-weight: bolder;
-" (click)="prevCards()" [disabled]="startIndex === 0"><</button>
-<button style="
-position: absolute;
-top: 39%;
-right: 5px;
-border-radius: 50%;
-width: 50px;
-height: 50px;
-color: #ffffff;
-border-color: #000000;
-background-color: #6856A4;
-font-size: 20px;
+font-size: 40px;
 font-weight: bolder;
 " (click)="nextCards()" [disabled]="startIndex === (cards.length - visibleCards)">></button>
 </div>
@@ -118,12 +119,9 @@ font-weight: bolder;
 <footer id="footer">
 <div class="container">
   <h3>Corz Academy</h3>
-  <p>CORZ Academy is an innovative educational platform designed to cater to diverse learning
-    needs across various domains of life. The platform serves as a bridge between course
-    providers, course recipients, and administrators, facilitating seamless interactions and
-    empowering users to engage in a Featured learning experience.</p>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic dolorem dolorum error blanditiis quasi molestias voluptate natus iste repudiandae cumque nemo provident, similique iusto soluta aperiam, eveniet iure. Ex, rerum!</p>
   <div class="social-links">
-    <a href="https://x.com/bhmtna_bnqdr" class="twitter"><i class="bi bi-twitter-x"></i>
+    <a href="#" class="twitter"><i class="bi bi-twitter-x"></i>
     </a>
     <a href="https://www.facebook.com/groups/1081733032244003" target="_blank" class="facebook"><i class="bi bi-facebook"></i>
     </a>

@@ -49,7 +49,7 @@ this.cards=response
     if (window.innerWidth >= 950) {
       this.visibleCards = 3; // For screen width >= 950, show 5 cards
     } else if(window.innerWidth >= 500){
-      this.visibleCards = 3; // For screen width < 950, show 3 cards
+      this.visibleCards = 2; // For screen width < 950, show 3 cards
     }else{
       this.visibleCards = 1
     }
