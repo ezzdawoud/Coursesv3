@@ -105,8 +105,9 @@ export class SinginComponent implements OnInit{
 this.services.singInMethod(email,password).subscribe(
   (response) => {
     localStorage.setItem("user",JSON.stringify(response))
+
     let role = response.role;
-    
+  
     this.authService.login(role);
     this.loder.hideLoader()
     
@@ -118,9 +119,7 @@ else if(role=="teacher"){
 
 }
 else{
-  
   this.Router.navigate(['/']);
-
 }
     },
   

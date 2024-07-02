@@ -18,7 +18,7 @@ export class AdminDashboardComponent {
     name: 'customScheme',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#5AA454', '#E44D25','#A44D25','#E44A25','#EAAD25',]
+    domain: ['#5AA454', '#E44D25','#A44D25','#E44A25','#EAAD25']
   };
 
   gradient: boolean = false;

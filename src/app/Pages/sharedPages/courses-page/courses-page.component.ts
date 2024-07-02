@@ -15,7 +15,7 @@ courses:any=[{teacherName:"a"}];
 filtercourses:any=[{}]
 isLoading=false;
 
-filter={serach:"",sort:"eralist",filterRating:0,filterPriceMin:0,filterPriceMax:0}
+filter={serach:"",sort:"eralist",filterRating:0,filterPriceMin:0,filterPriceMax:-1}
 
 currentPage: number = 1;
 itemsPerPage: number = 12;
@@ -67,7 +67,7 @@ price(min:any,max:any){
   if(max!=""){
     this.filter.filterPriceMax=max
   }else{
-    this.filter.filterPriceMax=0
+    this.filter.filterPriceMax=-1
 
   }
  
@@ -86,7 +86,7 @@ Reset(){
   this.filter.sort="eralist"
   this.filter.filterRating=0
   this.filter.filterPriceMin=0
-  this.filter.filterPriceMax=0
+  this.filter.filterPriceMax=-1
   this.getCourses()
 }
 getCourses(){

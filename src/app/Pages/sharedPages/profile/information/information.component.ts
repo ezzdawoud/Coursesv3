@@ -118,6 +118,12 @@ isChange=false;
 ischaging(){
   this.isChange=true;
 }
+isDeletedPhoto=false
+deletedPhoto(){
+  this.isDeletedPhoto=true
+  this.imageUrl="https://res.cloudinary.com/dolmafyz2/image/upload/v1713036363/shakpm74duvy4snp5pll.png"
+  // this.selectedFile=null;
+}
 validLableName=""
 validLablePhoneNumber=""
 validPhone=false;
@@ -175,8 +181,32 @@ if(this.updateDataForm.get("phone").hasError("required")){
       "token":token,
       "name":name,
       "phoneNumber":number
+    
     }
+    
+if(!this.selectedFile && this.isDeletedPhoto){
+  const Datauser={
+    "id":userid,
+    "token":token
+  }
+  this.isLoading=true
+  const url = `https://corzacademy.runasp.net/api/Users/delete user photo`;
+  this.http.post(url, Datauser).subscribe((response:any) => {
+    
+    Swal.fire({
+      title: "Success",
+      text:"deleted photo done",
+      icon: "success"
+    });
+    this.isLoading=false
+    this.isEditingVar=true
+  })
+}
+
+
+
    if(this.selectedFile){ 
+    this.isLoading=true
     const Datauser={
       "id":userid,
       "token":token
@@ -185,7 +215,6 @@ if(this.updateDataForm.get("phone").hasError("required")){
             formData.append('file', this.selectedFile);
             formData.append('id', userid);
             formData.append('token', token);
-
     const url = `https://corzacademy.runasp.net/api/Users/upload user pictures`;
     this.http.post(url, formData).subscribe((response:any) => {
       this.isLoading=false;

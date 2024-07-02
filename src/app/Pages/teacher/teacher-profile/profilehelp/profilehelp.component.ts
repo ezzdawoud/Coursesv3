@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class ProfilehelpComponent {
   accordions: { title: string, content: string, active: boolean }[] = [
-    { title: 'Accordion 1', content: 'Content 1', active: false },
-    { title: 'Accordion 2', content: 'Content 2', active: false },
+    { title: 'How to add new Course', content: '1)Click at Add new course button on the navBar or on the card\n2)Enter the infortmation of the course\n3)click at confirm button', active: false },
+    { title: 'How to add new lessons', content: '1)Select the course to which you want to add lessons.\n2)Click at edit button\n3)Click at Add new lesson\n4)Enter the infromation\n5)Upload the video of lesson\n6)Enter at confirm. ', active: false },
     // Add more accordion items as needed
   ];
 

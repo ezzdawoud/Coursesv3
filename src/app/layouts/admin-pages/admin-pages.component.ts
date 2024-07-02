@@ -25,8 +25,7 @@ export class AdminPagesComponent {
       this.Http.getUserRole(id,token).subscribe((response)=>{
         if(response[0]!="admin"){
           this.isLoading=false
-
-          this.route.navigate(["/signin"])
+          this.route.navigate([""])
         }
       })
       this.Http.getUserInformation(id, token).subscribe(

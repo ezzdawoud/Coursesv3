@@ -37,7 +37,7 @@
         <div class="inputs">
             <div class="coolinput">
                 <label for="corsename" class="text">Course value :</label>
-                <input type="number" placeholder="Enter your course value" id="corsename" class="input" formControlName="couresValue">
+                <input type="number" placeholder="Enter your course value" id="corsename" class="input" formControlName="couresValue" minlength="0">
                 <label style="font-size: 15px; color: red;" *ngIf="!couresValueValid">{{couresValueValidLabel}}</label>
 
             </div></div>

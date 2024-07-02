@@ -35,6 +35,7 @@ const routes: Routes = [
   {path:"profile",loadChildren:()=>import('./Pages/admin/admin-profile/admin-profile.module').then(m=>m.AdminProfileModule)},
   {path:"badCourses",loadChildren:()=>import('./Pages/admin/bad-courses/bad-courses.module').then(m=>m.BadCoursesModule)},
   {path:"lessonsPage/:courseId/:lessonsId",loadChildren:()=>import('./Pages/admin/admin-lessons-page/admin-lessons-page.module').then(m=>m.AdminLessonsPageModule)},
+  {path:"contacts",loadChildren:()=>import('./Pages/admin/admin-contact/admin-contact.module').then(m=>m.AdminContactModule)},
 
 ]
   ,canActivate:[AdminGuard]},

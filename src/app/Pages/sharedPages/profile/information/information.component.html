@@ -41,8 +41,8 @@
             <div class="edit" *ngIf="!isEditingVar" (click)="fileInput.click()">
                 <i class="bi bi-pencil-fill"></i>
             </div>
-            <div class="edit remove" *ngIf="!isEditingVar">
-                <i class="bi bi-x-lg"></i>
+            <div class="edit remove" *ngIf="!isEditingVar && imageUrl!='https://res.cloudinary.com/dolmafyz2/image/upload/v1713036363/shakpm74duvy4snp5pll.png'">
+                <i class="bi bi-x-lg" (click)="deletedPhoto()"></i>
                             </div>
         </div>
 

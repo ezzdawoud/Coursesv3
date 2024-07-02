@@ -56,9 +56,6 @@ export class AddCourseComponent {
     {
       "category": "Personal Development",
       "types": ["Time Management", "Goal Setting", "Leadership", "Communication Skills", "Mindfulness"]
-    },
-    {
-      "category": "something else",
     }
   ]
   selectedCategory: string = "Technology";

@@ -127,6 +127,11 @@ export class InformationComponent {
   ischaging(){
     this.isChange=true;
   }
+  isDeletedPhoto=false
+  deletedPhoto(){
+    this.isDeletedPhoto=true
+    this.imageUrl="https://res.cloudinary.com/dolmafyz2/image/upload/v1713036363/shakpm74duvy4snp5pll.png"
+  }
   validLableName=""
   validLablePhoneNumber=""
   validPhone=false;

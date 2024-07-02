@@ -21,7 +21,7 @@ export class LessonsPageComponent implements PipeTransform{
 
   videourl="";
 thereIsNoLessons=false;
-comments:any
+comments:any=[{subComments:[{}]}]
 userid="";
   constructor(private services: ServicesService, private router: Router, private parms: ActivatedRoute, private http: HttpClient,private sanitizer: DomSanitizer) {
     console.log("heelloo")
